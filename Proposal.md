@@ -1,5 +1,5 @@
 ### Team 1 - Empty String 
-#### P2 Proposal
+#### P2 Proposal - Shantel Chi, Shalei Kumar, Andres Siles-Loayza
 
 ##### Overview
 We want to create a robot that tracks how long we are on specific websites while we are on the browser. 
