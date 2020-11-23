@@ -3,6 +3,9 @@
 
 ##### Overview
 We want to create a robot that tracks how long we are on specific websites while we are on the browser. 
+
+User can input websites they want to put a time limit on and our robot will alert the user when they exceed that limit.
+
 If time permits we would also like to track how much time is spent on other applications. 
 
 ##### Applications
