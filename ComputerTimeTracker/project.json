@@ -1,10 +1,9 @@
 {
   "name": "ComputerTimeTracker",
-  "description": "A tracker for time spent on different websites and apps on the computer. Developed by Team Empty String.",
+  "description": "A tracker for time spent on different websites and apps on the computer. Developed by Team Empty String. Uses Robotic Enterprise Framework",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.7.2]",
-    "UiPath.Mail.Activities": "[1.7.2]",
     "UiPath.System.Activities": "[19.10.1]",
     "UiPath.UIAutomation.Activities": "[19.11.3]"
   },

@@ -22,24 +22,6 @@
     },
     {
       "Package": {
-        "Id": "UiPath.Mail.Activities",
-        "Version": "1.7.2"
-      },
-      "Assemblies": [
-        "C:\\Users\\Cito\\.nuget\\packages\\bouncycastle/1.8.5\\lib/BouncyCastle.Crypto.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\interop.domino.dll/1.0.0\\lib/Interop.Domino.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.Auth.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\system.valuetuple/4.5.0\\lib/net461/System.ValueTuple.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\uipath.mail.activities/1.7.2\\lib/net461/MailKit.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\uipath.mail.activities/1.7.2\\lib/net461/MimeKit.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\uipath.mail.activities/1.7.2\\lib/net461/UiPath.Mail.Activities.Design.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\uipath.mail.activities/1.7.2\\lib/net461/UiPath.Mail.Activities.dll",
-        "C:\\Users\\Cito\\.nuget\\packages\\uipath.mail.activities/1.7.2\\lib/net461/UiPath.Mail.dll"
-      ]
-    },
-    {
-      "Package": {
         "Id": "UiPath.System.Activities",
         "Version": "19.10.1"
       },
@@ -113,11 +95,6 @@
       "Version": "5.0.3",
       "Dependencies": []
     },
-    "BouncyCastle": {
-      "Id": "BouncyCastle",
-      "Version": "1.8.5",
-      "Dependencies": []
-    },
     "ClosedXML": {
       "Id": "ClosedXML",
       "Version": "0.87.1",
@@ -148,11 +125,6 @@
       "Version": "2.4.2",
       "Dependencies": []
     },
-    "interop.domino.dll": {
-      "Id": "interop.domino.dll",
-      "Version": "1.0.0",
-      "Dependencies": []
-    },
     "Microsoft.AspNet.SignalR.Client": {
       "Id": "Microsoft.AspNet.SignalR.Client",
       "Version": "2.4.0",
@@ -162,11 +134,6 @@
           "Item2": "[6.0.4, )"
         }
       ]
-    },
-    "Microsoft.Exchange.WebServices": {
-      "Id": "Microsoft.Exchange.WebServices",
-      "Version": "2.2.0",
-      "Dependencies": []
     },
     "Microsoft.Rest.ClientRuntime": {
       "Id": "Microsoft.Rest.ClientRuntime",
@@ -203,11 +170,6 @@
       "Version": "1.0.0",
       "Dependencies": []
     },
-    "System.ValueTuple": {
-      "Id": "System.ValueTuple",
-      "Version": "4.5.0",
-      "Dependencies": []
-    },
     "UiPath": {
       "Id": "UiPath",
       "Version": "19.10.7452.28108",
@@ -239,28 +201,6 @@
         },
         {
           "Item1": "SharpZipLib",
-          "Item2": "[1.0.0, )"
-        }
-      ]
-    },
-    "UiPath.Mail.Activities": {
-      "Id": "UiPath.Mail.Activities",
-      "Version": "1.7.2",
-      "Dependencies": [
-        {
-          "Item1": "System.ValueTuple",
-          "Item2": "[4.5.0, )"
-        },
-        {
-          "Item1": "Microsoft.Exchange.WebServices",
-          "Item2": "[2.2.0, )"
-        },
-        {
-          "Item1": "BouncyCastle",
-          "Item2": "[1.8.5, )"
-        },
-        {
-          "Item1": "interop.domino.dll",
           "Item2": "[1.0.0, )"
         }
       ]
