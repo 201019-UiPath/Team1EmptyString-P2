@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="720.666666666667,1918.66666666667" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="720.666666666667,2553.33333333333" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="25">
       <x:String>System.Activities</x:String>
@@ -50,7 +50,7 @@
       <AssemblyReference>System.Windows.Presentation</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="700.666666666667,1818.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Ask User if there are any applications/websites they would like to limit their time on" DisplayName="Sequence - Initialization Prompt" sap:VirtualizedContainerService.HintSize="700.666666666667,2493.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:TimeSpan)" Default="[new Dictionary(Of String, Timespan)]" Name="applications" />
       <Variable x:TypeArguments="x:Boolean" Default="False" Name="proceed" />
@@ -59,41 +59,67 @@
       <Variable x:TypeArguments="x:TimeSpan" Name="timelimit_timespan" />
       <Variable x:TypeArguments="x:String" Name="addanother" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Boolean)" Default="[new Dictionary(Of String, Boolean)]" Name="notification" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Boolean)" Default="[new Dictionary(Of String, Boolean)]" Name="restriction" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <While sap:VirtualizedContainerService.HintSize="658.666666666667,1393.33333333333" sap2010:WorkflowViewState.IdRef="While_1" Condition="[proceed.Equals(False)]">
-      <Sequence sap:VirtualizedContainerService.HintSize="612,1229.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <While sap2010:Annotation.AnnotationText="User can specify name of application/website and the time limit, as well as if they would like a 5 min warning and be forced out of the application once they have reached the time limit" DisplayName="While - User adds an application" sap:VirtualizedContainerService.HintSize="658.666666666667,2037.33333333333" sap2010:WorkflowViewState.IdRef="While_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <While.Condition>[proceed.Equals(False)]</While.Condition>
+      <Sequence DisplayName="Sequence - While" sap:VirtualizedContainerService.HintSize="612,1828" sap2010:WorkflowViewState.IdRef="Sequence_2">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Name="warning" />
+          <Variable x:TypeArguments="x:String" Name="forceClose" />
         </Sequence.Variables>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="570,92" sap2010:WorkflowViewState.IdRef="InputDialog_7" IsPassword="False" Label="Enter Name of Application you would like to limit access: " Title="Limit Application">
+        <ui:InputDialog Options="{x:Null}" sap2010:Annotation.AnnotationText="Insert name of application/website" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="570,122.666666666667" sap2010:WorkflowViewState.IdRef="InputDialog_7" IsPassword="False" Label="Enter Name of Application/Website you would like to limit access: " Title="Application/Website">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="x:String">[website]</OutArgument>
           </ui:InputDialog.Result>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:InputDialog>
-        <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="570,92" sap2010:WorkflowViewState.IdRef="InputDialog_8" IsPassword="False" Label="[&quot;How many minutes would you like to limit on  &quot; + website + &quot;?&quot;]" Title="Time Limit">
+        <ui:InputDialog Options="{x:Null}" sap2010:Annotation.AnnotationText="Insert time limit in minutes" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="570,122.666666666667" sap2010:WorkflowViewState.IdRef="InputDialog_8" IsPassword="False" Label="[&quot;How many minutes would you like to limit on  &quot; + website + &quot;?&quot;]" Title="Time Limit">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="x:Int32">[timelimit]</OutArgument>
           </ui:InputDialog.Result>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:InputDialog>
-        <Assign sap:VirtualizedContainerService.HintSize="570,62" sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign sap2010:Annotation.AnnotationText="Convert minutes into Timespan variable" DisplayName="Assign" sap:VirtualizedContainerService.HintSize="570,92.6666666666667" sap2010:WorkflowViewState.IdRef="Assign_4">
           <Assign.To>
             <OutArgument x:TypeArguments="x:TimeSpan">[timelimit_timespan]</OutArgument>
           </Assign.To>
           <Assign.Value>
             <InArgument x:TypeArguments="x:TimeSpan">[TimeSpan.FromMinutes(timelimit)]</InArgument>
           </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </Assign>
-        <Assign sap:VirtualizedContainerService.HintSize="570,62" sap2010:WorkflowViewState.IdRef="Assign_5">
+        <Assign sap2010:Annotation.AnnotationText="Add App/Website and time limit to a dictionary" DisplayName="Assign" sap:VirtualizedContainerService.HintSize="570,107.333333333333" sap2010:WorkflowViewState.IdRef="Assign_5">
           <Assign.To>
             <OutArgument x:TypeArguments="x:TimeSpan">[applications(website)]</OutArgument>
           </Assign.To>
@@ -103,13 +129,15 @@
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </Assign>
-        <ui:MessageBox Caption="{x:Null}" Buttons="YesNo" ChosenButton="[warning]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="570,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Would you like a 5 min warning before you have reached your time limit?&quot;]">
+        <ui:MessageBox Caption="{x:Null}" sap2010:Annotation.AnnotationText="Prompt User if they would like a 5 min warning" Buttons="YesNo" ChosenButton="[warning]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="570,89.3333333333333" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Would you like a 5 min warning before you have reached your time limit?&quot;]">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:MessageBox>
@@ -135,10 +163,41 @@
             </Assign>
           </If.Else>
         </If>
-        <ui:MessageBox Caption="{x:Null}" Buttons="YesNo" ChosenButton="[addanother]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="570,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Would you like to add another applications?&quot;]">
+        <ui:MessageBox Caption="{x:Null}" sap2010:Annotation.AnnotationText="Prompt User if they would like to be forced out" Buttons="YesNo" ChosenButton="[forceClose]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="570,89.3333333333333" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;Would you like to force close application when you reach the time limit?&quot;]">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:MessageBox>
+        <If Condition="[forceClose.Equals(&quot;Yes&quot;)]" sap:VirtualizedContainerService.HintSize="570,216" sap2010:WorkflowViewState.IdRef="If_4">
+          <If.Then>
+            <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_11">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[restriction(website)]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Then>
+          <If.Else>
+            <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_12">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[restriction(website)]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Else>
+        </If>
+        <ui:MessageBox Caption="{x:Null}" sap2010:Annotation.AnnotationText="Prompt User if they would like to add another application/website" Buttons="YesNo" ChosenButton="[addanother]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="570,104" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Would you like to add another applications?&quot;]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:MessageBox>
@@ -168,7 +227,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="229.333333333333,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[String.Format(&quot;{0} limited to {1} with notification settings as {2}&quot;, item, applications(item), notification(item))]" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="229.333333333333,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[String.Format(&quot;{0} limited to {1} with notification settings as {2} and force close as {3}&quot;, item, applications(item), notification(item), restriction(item))]" />
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
