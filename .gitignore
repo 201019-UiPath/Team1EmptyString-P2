@@ -1,0 +1,8 @@
+### UiPath Studio ###
+
+*PackageCache.json
+*ProjectSettings.json
+*.cache
+*.props
+*.backup
+*AllDependencies.json
