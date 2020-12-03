@@ -1297,15 +1297,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cito\\.nuget\\packages\\": {}
+    "C:\\Users\\shale\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "ComputerTimeTracker",
       "projectName": "ComputerTimeTracker",
-      "projectPath": "C:\\Users\\Cito\\Revature\\Training\\Team1EmptyString-P2\\ComputerTimeTracker\\.local",
-      "packagesPath": "C:\\Users\\Cito\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Cito\\Revature\\Training\\Team1EmptyString-P2\\ComputerTimeTracker\\.local"
+      "projectPath": "D:\\UIPathBatch\\Team1EmptyString-P2\\ComputerTimeTracker\\.local",
+      "packagesPath": "C:\\Users\\shale\\.nuget\\packages\\",
+      "outputPath": "D:\\UIPathBatch\\Team1EmptyString-P2\\ComputerTimeTracker\\.local"
     },
     "frameworks": {
       "net461": {

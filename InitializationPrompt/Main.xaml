@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="720.666666666667,2553.33333333333" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="720.666666666667,2916.66666666667" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="25">
+    <scg:List x:TypeArguments="x:String" Capacity="27">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -26,10 +26,12 @@
       <x:String>System.Windows</x:String>
       <x:String>System.Windows.Media.Animation</x:String>
       <x:String>System.Windows.Threading</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="18">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="20">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -48,18 +50,19 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.Windows.Presentation</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Ask User if there are any applications/websites they would like to limit their time on" DisplayName="Sequence - Initialization Prompt" sap:VirtualizedContainerService.HintSize="700.666666666667,2493.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Ask User if there are any applications/websites they would like to limit their time on" DisplayName="Sequence - Initialization Prompt" sap:VirtualizedContainerService.HintSize="700.666666666667,2816.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:TimeSpan)" Default="[new Dictionary(Of String, Timespan)]" Name="applications" />
-      <Variable x:TypeArguments="x:Boolean" Default="False" Name="proceed" />
-      <Variable x:TypeArguments="x:String" Name="website" />
+      <Variable x:TypeArguments="x:Boolean" Default="True" Name="proceed" />
+      <Variable x:TypeArguments="x:String" Name="application" />
       <Variable x:TypeArguments="x:Int32" Name="timelimit" />
       <Variable x:TypeArguments="x:TimeSpan" Name="timelimit_timespan" />
-      <Variable x:TypeArguments="x:String" Name="addanother" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Boolean)" Default="[new Dictionary(Of String, Boolean)]" Name="notification" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Boolean)" Default="[new Dictionary(Of String, Boolean)]" Name="restriction" />
+      <Variable x:TypeArguments="sd:DataRow" Name="row" />
+      <Variable x:TypeArguments="x:String" Name="variable1" />
+      <Variable x:TypeArguments="sd:DataTable" Name="userSettingsDT" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -67,26 +70,44 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <While sap2010:Annotation.AnnotationText="User can specify name of application/website and the time limit, as well as if they would like a 5 min warning and be forced out of the application once they have reached the time limit" DisplayName="While - User adds an application" sap:VirtualizedContainerService.HintSize="658.666666666667,2037.33333333333" sap2010:WorkflowViewState.IdRef="While_1">
+    <ui:BuildDataTable sap2010:Annotation.AnnotationText="Initialize a datatable to store User Settings in config file" DataTable="[userSettingsDT]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="658.666666666667,89.3333333333333" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Name&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Time_Limit&quot; type=&quot;xs:duration&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Notification&quot; type=&quot;xs:boolean&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Force_Close&quot; type=&quot;xs:boolean&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <While.Condition>[proceed.Equals(False)]</While.Condition>
-      <Sequence DisplayName="Sequence - While" sap:VirtualizedContainerService.HintSize="612,1828" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    </ui:BuildDataTable>
+    <While sap2010:Annotation.AnnotationText="User can specify name of application/website and the time limit, as well as if they would like a 5 min warning and be forced out of the application once they have reached the time limit" DisplayName="While - User adds an application" sap:VirtualizedContainerService.HintSize="658.666666666667,2379.33333333333" sap2010:WorkflowViewState.IdRef="While_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <While.Condition>
+        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="proceed" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_3" />
+      </While.Condition>
+      <Sequence DisplayName="Sequence - While" sap:VirtualizedContainerService.HintSize="612,2170" sap2010:WorkflowViewState.IdRef="Sequence_2">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Name="warning" />
           <Variable x:TypeArguments="x:String" Name="forceClose" />
+          <Variable x:TypeArguments="x:String" Name="addAnother" />
         </Sequence.Variables>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
+        <Assign sap:VirtualizedContainerService.HintSize="570,62" sap2010:WorkflowViewState.IdRef="Assign_14">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataRow">[userSettingsDT.NewRow()]</InArgument>
+          </Assign.Value>
+        </Assign>
         <ui:InputDialog Options="{x:Null}" sap2010:Annotation.AnnotationText="Insert name of application/website" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="570,122.666666666667" sap2010:WorkflowViewState.IdRef="InputDialog_7" IsPassword="False" Label="Enter Name of Application/Website you would like to limit access: " Title="Application/Website">
           <ui:InputDialog.Result>
-            <OutArgument x:TypeArguments="x:String">[website]</OutArgument>
+            <OutArgument x:TypeArguments="x:String">[application]</OutArgument>
           </ui:InputDialog.Result>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -96,7 +117,15 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:InputDialog>
-        <ui:InputDialog Options="{x:Null}" sap2010:Annotation.AnnotationText="Insert time limit in minutes" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="570,122.666666666667" sap2010:WorkflowViewState.IdRef="InputDialog_8" IsPassword="False" Label="[&quot;How many minutes would you like to limit on  &quot; + website + &quot;?&quot;]" Title="Time Limit">
+        <Assign sap:VirtualizedContainerService.HintSize="570,62" sap2010:WorkflowViewState.IdRef="Assign_13">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Object">[row("Name")]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Object">[application]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:InputDialog Options="{x:Null}" sap2010:Annotation.AnnotationText="Insert time limit in minutes" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="570,122.666666666667" sap2010:WorkflowViewState.IdRef="InputDialog_8" IsPassword="False" Label="[&quot;How many minutes would you like to limit on  &quot; + application + &quot;?&quot;]" Title="Time Limit">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="x:Int32">[timelimit]</OutArgument>
           </ui:InputDialog.Result>
@@ -119,12 +148,12 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </Assign>
-        <Assign sap2010:Annotation.AnnotationText="Add App/Website and time limit to a dictionary" DisplayName="Assign" sap:VirtualizedContainerService.HintSize="570,107.333333333333" sap2010:WorkflowViewState.IdRef="Assign_5">
+        <Assign sap2010:Annotation.AnnotationText="Add App/Website and time limit to DataRow" DisplayName="Assign" sap:VirtualizedContainerService.HintSize="570,107.333333333333" sap2010:WorkflowViewState.IdRef="Assign_5">
           <Assign.To>
-            <OutArgument x:TypeArguments="x:TimeSpan">[applications(website)]</OutArgument>
+            <OutArgument x:TypeArguments="x:Object">[row("Time_Limit")]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="x:TimeSpan">[timelimit_timespan]</InArgument>
+            <InArgument x:TypeArguments="x:Object">[timelimit_timespan]</InArgument>
           </Assign.Value>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -145,20 +174,20 @@
           <If.Then>
             <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_7">
               <Assign.To>
-                <OutArgument x:TypeArguments="x:Boolean">[notification(website)]</OutArgument>
+                <OutArgument x:TypeArguments="x:Object">[row("Notification")]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                <InArgument x:TypeArguments="x:Object">[True]</InArgument>
               </Assign.Value>
             </Assign>
           </If.Then>
           <If.Else>
             <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_8">
               <Assign.To>
-                <OutArgument x:TypeArguments="x:Boolean">[notification(website)]</OutArgument>
+                <OutArgument x:TypeArguments="x:Object">[row("Notification")]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                <InArgument x:TypeArguments="x:Object">[False]</InArgument>
               </Assign.Value>
             </Assign>
           </If.Else>
@@ -175,25 +204,32 @@
           <If.Then>
             <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_11">
               <Assign.To>
-                <OutArgument x:TypeArguments="x:Boolean">[restriction(website)]</OutArgument>
+                <OutArgument x:TypeArguments="x:Object">[row("Force_Close")]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                <InArgument x:TypeArguments="x:Object">[True]</InArgument>
               </Assign.Value>
             </Assign>
           </If.Then>
           <If.Else>
             <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_12">
               <Assign.To>
-                <OutArgument x:TypeArguments="x:Boolean">[restriction(website)]</OutArgument>
+                <OutArgument x:TypeArguments="x:Object">[row("Force_Close")]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                <InArgument x:TypeArguments="x:Object">[False]</InArgument>
               </Assign.Value>
             </Assign>
           </If.Else>
         </If>
-        <ui:MessageBox Caption="{x:Null}" sap2010:Annotation.AnnotationText="Prompt User if they would like to add another application/website" Buttons="YesNo" ChosenButton="[addanother]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="570,104" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Would you like to add another applications?&quot;]">
+        <ui:AddDataRow ArrayRow="{x:Null}" sap2010:Annotation.AnnotationText="Add DataRow to DataTable&#xD;&#xA;" DataRow="[row]" DataTable="[userSettingsDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="570,67.3333333333333" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:AddDataRow>
+        <ui:MessageBox Caption="{x:Null}" sap2010:Annotation.AnnotationText="Prompt User if they would like to add another application/website" Buttons="YesNo" ChosenButton="[addAnother]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="570,104" sap2010:WorkflowViewState.IdRef="MessageBox_7" Text="[&quot;Would you like to add another applications?&quot;]">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -201,36 +237,41 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:MessageBox>
-        <If Condition="[addanother.Equals(&quot;Yes&quot;)]" sap:VirtualizedContainerService.HintSize="570,216" sap2010:WorkflowViewState.IdRef="If_2">
+        <If sap2010:Annotation.AnnotationText="If User does not want to add another application then break from while loop" Condition="[addAnother.Equals(&quot;Yes&quot;)]" sap:VirtualizedContainerService.HintSize="570,246.666666666667" sap2010:WorkflowViewState.IdRef="If_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
           <If.Else>
-            <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_6">
+            <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_15">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:Boolean">[proceed]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
               </Assign.Value>
             </Assign>
           </If.Else>
         </If>
       </Sequence>
     </While>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="658.666666666667,293.333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[applications.Keys]">
-      <ui:ForEach.Body>
-        <ActivityAction x:TypeArguments="x:String">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:String" Name="item" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="271.333333333333,154.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="229.333333333333,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[String.Format(&quot;{0} limited to {1} with notification settings as {2} and force close as {3}&quot;, item, applications(item), notification(item), restriction(item))]" />
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEach.Body>
-    </ui:ForEach>
+    <ui:WriteRange AddHeaders="True" sap2010:Annotation.AnnotationText="Add datable with User Settings to Config File" DataTable="[userSettingsDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="658.666666666667,145.333333333333" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="UserSettings">
+      <ui:WriteRange.StartingCell>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </ui:WriteRange.StartingCell>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:WriteRange.WorkbookPath>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </ui:WriteRange.WorkbookPath>
+    </ui:WriteRange>
   </Sequence>
 </Activity>
