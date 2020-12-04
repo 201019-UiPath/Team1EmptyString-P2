@@ -1,6 +1,6 @@
 {
-  "name": "ExceedTimeLimit",
-  "description": "This will alert the user if they are reaching their time limit and close the application once it has been reached",
+  "name": "ExceedTimeLimit_Browser",
+  "description": "Blank Process",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.7.2]",
