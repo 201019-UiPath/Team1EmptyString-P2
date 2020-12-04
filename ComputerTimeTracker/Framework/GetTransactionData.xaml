@@ -11,7 +11,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>696.8,1160</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>711.2,1136</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="23">
@@ -62,10 +62,9 @@
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Monitors the desktop for user input events. The workflow will wait at this point until the user enters some input into a window. Then, the target window for that input will be extracted and return as the TransactionItem out argument.&#xD;&#xA;&#xD;&#xA;This workflow assumes that the Config dictionary is initialized with settings and constants." DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="691.2,1076" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Monitors the desktop for user input events. The workflow will wait at this point until the user enters some input into a window. Then, the target window for that input will be extracted and return as the TransactionItem out argument.&#xA;&#xA;This workflow assumes that the Config dictionary is initialized with settings and constants." DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="691.2,1076" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:EventInfo" Name="eventInfo" />
     </Sequence.Variables>
@@ -77,8 +76,8 @@
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart sap:VirtualizedContainerService.HintSize="649.6,907.2" sap2010:WorkflowViewState.IdRef="Flowchart_1">
       <Flowchart.Variables>
-        <Variable x:TypeArguments="x:Boolean" Name="endTracking" />
-        <Variable x:TypeArguments="x:Boolean" Name="appsOpen" />
+        <Variable x:TypeArguments="x:Boolean" Default="True" Name="endTracking" />
+        <Variable x:TypeArguments="x:Boolean" Default="False" Name="appsOpen" />
       </Flowchart.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -133,7 +132,7 @@
                     <av:PointCollection x:Key="ConnectorLocation">120,566.4 120,637.6</av:PointCollection>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Sequence sap2010:Annotation.AnnotationText="Wait until user input occurs, then set targetWindow based on input. This will result in a transition to the Process Transaction state." DisplayName="Wait for user input" sap:VirtualizedContainerService.HintSize="496.8,566.4" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                <Sequence sap2010:Annotation.AnnotationText="Wait until user input occurs, then set targetWindow based on input. This will result in a transition to the Process Transaction state." DisplayName="Wait for user input" sap:VirtualizedContainerService.HintSize="200,160.8" sap2010:WorkflowViewState.IdRef="Sequence_8">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
