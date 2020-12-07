@@ -1,4 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ExceedTimeLimit" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1248,2066.66666666667" sap2010:WorkflowViewState.IdRef="ExceedTimeLimit_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ExceedTimeLimit" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TrackedAppRow" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_CurrentActiveTime" Type="InArgument(x:TimeSpan)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1248,2066.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ExceedTimeLimit_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -42,17 +51,20 @@
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Check if the User has exceeded the time limit for the specific website/application and respond accordingly based on what the User specified in the initialization prompt&#xA;IMPORTANT: Extension for specific web browser must be downloaded" DisplayName="Sequence - Exceed Time Limit" sap:VirtualizedContainerService.HintSize="1228,1966.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="https://www.youtube.com/" Name="url" />
-      <Variable x:TypeArguments="x:TimeSpan" Default="00:10:00" Name="timeLimit" />
+      <Variable x:TypeArguments="x:TimeSpan" Default="[TimeSpan.Parse(in_TrackedAppRow(&quot;Time Limit&quot;).ToString)]" Name="timeLimit" />
       <Variable x:TypeArguments="x:TimeSpan" Default="00:10:00" Name="currentTime" />
-      <Variable x:TypeArguments="x:Boolean" Default="True" Name="notification" />
+      <Variable x:TypeArguments="x:Boolean" Default="[Convert.ToBoolean(in_TrackedAppRow(&quot;Notification&quot;))]" Name="notification" />
       <Variable x:TypeArguments="x:String" Name="selector" />
-      <Variable x:TypeArguments="x:String" Default="chrome" Name="app" />
-      <Variable x:TypeArguments="x:Boolean" Default="True" Name="restriction" />
+      <Variable x:TypeArguments="x:String" Default="[in_TrackedAppRow(&quot;Name&quot;).ToString]" Name="app" />
+      <Variable x:TypeArguments="x:Boolean" Default="[Convert.ToBoolean(in_TrackedAppRow(&quot;Force Close&quot;))]" Name="restriction" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
