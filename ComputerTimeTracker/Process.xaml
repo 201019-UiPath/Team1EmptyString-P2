@@ -4,6 +4,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="io_TrackedApps" Type="InOutArgument(scg:Dictionary(x:String, x:TimeSpan))" />
     <x:Property Name="in_CurrentWindow" Type="InArgument(x:String)" />
+    <x:Property Name="in_TimeSpan" Type="InArgument(x:TimeSpan)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -36,7 +37,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="18">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="36">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -55,6 +56,7 @@
       <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Accepts a user input event and analyzes the current time-tracking data. Checks if the user input event occured in an application that the user is tracking. If so, checks if the input event was for the &quot;current&quot; application. Then, adds the time in between events to the time spent on that application. If the last input event was for a different application, sets the current application.&#xA;&#xA;If the user input event occurred in application that is not being tracked, sets the current application to that application.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="707.333333333333,1344" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -82,7 +84,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <Flowchart.StartNode>
-        <x:Reference>__ReferenceID8</x:Reference>
+        <x:Reference>__ReferenceID7</x:Reference>
       </Flowchart.StartNode>
       <FlowDecision x:Name="__ReferenceID3" Condition="[isInTrackedApps]" DisplayName="Event was in tracked app?" sap:VirtualizedContainerService.HintSize="142,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
         <sap:WorkflowViewStateService.ViewState>
@@ -100,7 +102,7 @@
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <av:Point x:Key="ShapeLocation">190,405.6</av:Point>
                 <av:Size x:Key="ShapeSize">200,69.3333333333333</av:Size>
-                <av:PointCollection x:Key="ConnectorLocation">290,474.4 290,504.4 300,504.4 300,516.4</av:PointCollection>
+                <av:PointCollection x:Key="ConnectorLocation">290,474.933333333333 290,506.666666666667</av:PointCollection>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <Sequence DisplayName="Check if event was in current app" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_3">
@@ -137,10 +139,10 @@
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <av:Point x:Key="ShapeLocation">230,516.4</av:Point>
+                    <av:Point x:Key="ShapeLocation">220,506.666666666667</av:Point>
                     <av:Size x:Key="ShapeSize">140,86.6666666666667</av:Size>
-                    <av:PointCollection x:Key="FalseConnector">370,560 500,560 500,819.6</av:PointCollection>
-                    <av:PointCollection x:Key="TrueConnector">230,560 170,560 170,660 200,660</av:PointCollection>
+                    <av:PointCollection x:Key="FalseConnector">360,550 500,550 500,819.6</av:PointCollection>
+                    <av:PointCollection x:Key="TrueConnector">220,550 171.333333333333,550 171.333333333333,660.266666666667 200,660.266666666667</av:PointCollection>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <FlowDecision.True>
@@ -149,7 +151,7 @@
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <av:Point x:Key="ShapeLocation">200,625.6</av:Point>
                         <av:Size x:Key="ShapeSize">200,69.3333333333333</av:Size>
-                        <av:PointCollection x:Key="ConnectorLocation">300,694.933333333333 300,724.933333333333 308.533333333333,724.933333333333 308.533333333333,726.4</av:PointCollection>
+                        <av:PointCollection x:Key="ConnectorLocation">300,694.933333333333 300,725.333333333333</av:PointCollection>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <Sequence DisplayName="Add time to tracked app" sap:VirtualizedContainerService.HintSize="304,154" sap2010:WorkflowViewState.IdRef="Sequence_5">
@@ -163,61 +165,45 @@
                           <OutArgument x:TypeArguments="x:TimeSpan">[io_TrackedApps(eventWindow)]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="x:TimeSpan">00:05:00</InArgument>
+                          <InArgument x:TypeArguments="x:TimeSpan">[io_TrackedApps(eventWindow) + in_TimeSpan]</InArgument>
                         </Assign.Value>
                       </Assign>
                     </Sequence>
                     <FlowStep.Next>
-                      <FlowDecision x:Name="__ReferenceID5" Condition="False" DisplayName="Does time exceed limit?" sap:VirtualizedContainerService.HintSize="130.666666666667,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
+                      <FlowStep x:Name="__ReferenceID5">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            <av:Point x:Key="ShapeLocation">243.2,726.4</av:Point>
-                            <av:Size x:Key="ShapeSize">130.666666666667,86.6666666666667</av:Size>
-                            <av:PointCollection x:Key="TrueConnector">243.2,770 120,770 120,855.6</av:PointCollection>
-                            <av:PointCollection x:Key="FalseConnector">373.866666666667,769.733333333333 500,769.733333333333 500,819.6</av:PointCollection>
+                            <av:Point x:Key="ShapeLocation">200,725.333333333333</av:Point>
+                            <av:Size x:Key="ShapeSize">200,69.3333333333333</av:Size>
+                            <av:PointCollection x:Key="ConnectorLocation">300,794.666666666667 300,901.933333333333 400,901.933333333333</av:PointCollection>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <FlowDecision.True>
-                          <FlowStep x:Name="__ReferenceID6">
+                        <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                        <FlowStep.Next>
+                          <FlowStep x:Name="__ReferenceID0">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <av:Point x:Key="ShapeLocation">20,855.6</av:Point>
-                                <av:Size x:Key="ShapeSize">200,69.3333333333333</av:Size>
-                                <av:PointCollection x:Key="ConnectorLocation">220,890.266666666667 250,890.266666666667 250,901.933333333333 400,901.933333333333</av:PointCollection>
+                                <av:Point x:Key="ShapeLocation">400,819.6</av:Point>
+                                <av:Size x:Key="ShapeSize">200,164.666666666667</av:Size>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <Sequence sap2010:Annotation.AnnotationText="Allow the Process workflow to end without exception. This will result in a transition back to the Get Transaction Data state." DisplayName="End Process Transaction" sap:VirtualizedContainerService.HintSize="200,164.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
                             </Sequence>
-                            <FlowStep.Next>
-                              <FlowStep x:Name="__ReferenceID0">
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <av:Point x:Key="ShapeLocation">400,819.6</av:Point>
-                                    <av:Size x:Key="ShapeSize">200,164.666666666667</av:Size>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                                <Sequence sap2010:Annotation.AnnotationText="Allow the Process workflow to end without exception. This will result in a transition back to the Get Transaction Data state." DisplayName="End Process Transaction" sap:VirtualizedContainerService.HintSize="200,164.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </Sequence>
-                              </FlowStep>
-                            </FlowStep.Next>
                           </FlowStep>
-                        </FlowDecision.True>
-                        <FlowDecision.False>
-                          <x:Reference>__ReferenceID0</x:Reference>
-                        </FlowDecision.False>
-                      </FlowDecision>
+                        </FlowStep.Next>
+                      </FlowStep>
                     </FlowStep.Next>
                   </FlowStep>
                 </FlowDecision.True>
@@ -234,7 +220,7 @@
       </FlowDecision>
       <x:Reference>__ReferenceID1</x:Reference>
       <x:Reference>__ReferenceID2</x:Reference>
-      <FlowStep x:Name="__ReferenceID7">
+      <FlowStep x:Name="__ReferenceID6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">200,195.6</av:Point>
@@ -285,9 +271,8 @@
       </FlowStep>
       <x:Reference>__ReferenceID4</x:Reference>
       <x:Reference>__ReferenceID5</x:Reference>
-      <x:Reference>__ReferenceID6</x:Reference>
       <x:Reference>__ReferenceID0</x:Reference>
-      <FlowStep x:Name="__ReferenceID8">
+      <FlowStep x:Name="__ReferenceID7">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">200,105.6</av:Point>
@@ -303,7 +288,7 @@
           </sap:WorkflowViewStateService.ViewState>
         </Sequence>
         <FlowStep.Next>
-          <x:Reference>__ReferenceID7</x:Reference>
+          <x:Reference>__ReferenceID6</x:Reference>
         </FlowStep.Next>
       </FlowStep>
     </Flowchart>
