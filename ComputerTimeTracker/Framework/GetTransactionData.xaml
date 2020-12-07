@@ -2,19 +2,17 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Sequential counter of transaction items." Name="in_TransactionNumber" Type="InArgument(x:Int32)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property sap2010:Annotation.AnnotationText="Allow the optional addition of information about the transaction item." Name="out_TransactionField1" Type="OutArgument(x:String)" />
-    <x:Property sap2010:Annotation.AnnotationText="Allow the optional addition of information about the transaction item." Name="out_TransactionField2" Type="OutArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Transaction ID used for information and logging purposes. Ideally, the ID should be unique for each transaction. " Name="out_TransactionID" Type="OutArgument(x:String)" />
-    <x:Property sap2010:Annotation.AnnotationText="This variable can be used in case transactions are stored in a DataTable (for example, after being retrieved from a spreadsheet)." Name="io_TransactionData" Type="InOutArgument(sd:DataTable)" />
-    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="out_targetWindow" Type="OutArgument(ui:Window)" />
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="out_TransactionItem" Type="OutArgument(ui:EventInfo)" />
+    <x:Property sap2010:Annotation.AnnotationText="DataTable containing the apps being tracked for time spent working. Includes names and restriction settings.&#xD;&#xA;&#xD;&#xA;Columns:&#xD;&#xA;&quot;Name&quot; : The name of the tracked app&#xD;&#xA;&quot;Time Limit&quot; : The maximum amount of time the user requested on that app&#xD;&#xA;&quot;Notification&quot; : True if the user wants to be notified 5 min. before exceeding their time limit&#xD;&#xA;&quot;Force Close&quot; : True if the user wants to force close the app after exceeding their time limit" Name="in_TrackedApps" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>711.2,1136</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>711.2,1176</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="23">
+    <scg:List x:TypeArguments="x:String" Capacity="46">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -38,6 +36,7 @@
       <x:String>System.Windows.Markup</x:String>
       <x:String>Microsoft.Activities</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -62,6 +61,7 @@
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Monitors the desktop for user input events. The workflow will wait at this point until the user enters some input into a window. Then, the target window for that input will be extracted and return as the TransactionItem out argument.&#xA;&#xA;This workflow assumes that the Config dictionary is initialized with settings and constants." DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="691.2,1076" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -101,9 +101,10 @@
             <av:PointCollection x:Key="ConnectorLocation">210,216.4 210,246.4 260,246.4 260,276.4</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Check if any of the apps specified as being tracked are open." DisplayName="Invoke CheckIfTrackedAppsAreOpen workflow" sap:VirtualizedContainerService.HintSize="200,112.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="AppTracking\CheckIfTrackedAppsAreOpen.xaml">
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Check if any of the apps specified as being tracked are open." DisplayName="Invoke CheckIfTrackedAppsAreOpen workflow" sap:VirtualizedContainerService.HintSize="333.6,132" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="AppTracking\CheckIfTrackedAppsAreOpen.xaml">
           <ui:InvokeWorkflowFile.Arguments>
             <OutArgument x:TypeArguments="x:Boolean" x:Key="out_AppsOpen">[appsOpen]</OutArgument>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_TrackedApps">[in_TrackedApps]</InArgument>
           </ui:InvokeWorkflowFile.Arguments>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -157,10 +158,10 @@
                           <ui:GetEventInfo x:TypeArguments="ui:EventInfo" DisplayName="Get Event Info" sap:VirtualizedContainerService.HintSize="262.4,22.4" sap2010:WorkflowViewState.IdRef="GetEventInfo`1_2" InterceptedEvent="[args]" Result="[eventInfo]" />
                           <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_10">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="ui:Window">[out_targetWindow]</OutArgument>
+                              <OutArgument x:TypeArguments="ui:EventInfo">[out_TransactionItem]</OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="ui:Window">[eventInfo.TargetWindow]</InArgument>
+                              <InArgument x:TypeArguments="ui:EventInfo">[eventInfo]</InArgument>
                             </Assign.Value>
                           </Assign>
                         </Sequence>
@@ -193,7 +194,7 @@
                           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <If sap2010:Annotation.AnnotationText="This optional step can be used to include more information about a transaction item and it is used mainly for logging and visualization purposes.&#xA;For example, if transaction items are invoices, then out_TransactionID can be the invoice number, out_TransactionField1 can be the invoice date and out_TransactionField2 can be the invoice amount." Condition="[out_targetWindow isNot Nothing]" DisplayName="If a new transaction item is retrieved, get additional information about it" sap:VirtualizedContainerService.HintSize="483.2,638.4" sap2010:WorkflowViewState.IdRef="If_3">
+                      <If sap2010:Annotation.AnnotationText="This optional step can be used to include more information about a transaction item and it is used mainly for logging and visualization purposes.&#xA;For example, if transaction items are invoices, then out_TransactionID can be the invoice number, out_TransactionField1 can be the invoice date and out_TransactionField2 can be the invoice amount." Condition="[out_TransactionItem isNot Nothing]" DisplayName="If a new transaction item is retrieved, get additional information about it" sap:VirtualizedContainerService.HintSize="483.2,438.4" sap2010:WorkflowViewState.IdRef="If_3">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -202,7 +203,7 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                         <If.Then>
-                          <Sequence sap2010:Annotation.AnnotationText="Write data to the added log fields that identify the transaction." DisplayName="Add transaction information to log fields" sap:VirtualizedContainerService.HintSize="304,396.8" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                          <Sequence sap2010:Annotation.AnnotationText="Write data to the added log fields that identify the transaction." DisplayName="Add transaction information to log fields" sap:VirtualizedContainerService.HintSize="304,196.8" sap2010:WorkflowViewState.IdRef="Sequence_11">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -215,22 +216,6 @@
                               </Assign.To>
                               <Assign.Value>
                                 <InArgument x:TypeArguments="x:String">[now.ToString]</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <Assign DisplayName="Assign out_TransactionField1" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_13">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="x:String">[out_TransactionField1]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="x:String">[string.Empty]</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <Assign DisplayName="Assign out_TransactionField2" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_14">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="x:String">[out_TransactionField2]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="x:String">[string.Empty]</InArgument>
                               </Assign.Value>
                             </Assign>
                           </Sequence>
@@ -286,10 +271,10 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <Assign DisplayName="Assign out_targetWindow" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_11">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="ui:Window">[out_targetWindow]</OutArgument>
+                              <OutArgument x:TypeArguments="ui:EventInfo">[out_TransactionItem]</OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="ui:Window">[Nothing]</InArgument>
+                              <InArgument x:TypeArguments="ui:EventInfo">[Nothing]</InArgument>
                             </Assign.Value>
                           </Assign>
                         </Sequence>
