@@ -58,9 +58,9 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Check if the User has exceeded the time limit for the specific website/application and respond accordingly based on what the User specified in the initialization prompt&#xA;IMPORTANT: Extension for specific web browser must be downloaded" DisplayName="Sequence - Exceed Time Limit" sap:VirtualizedContainerService.HintSize="1228,1966.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Default="https://www.youtube.com/" Name="url" />
+      <Variable x:TypeArguments="x:String" Name="url" />
       <Variable x:TypeArguments="x:TimeSpan" Default="[TimeSpan.Parse(in_TrackedAppRow(&quot;Time Limit&quot;).ToString)]" Name="timeLimit" />
-      <Variable x:TypeArguments="x:TimeSpan" Default="00:10:00" Name="currentTime" />
+      <Variable x:TypeArguments="x:TimeSpan" Default="[in_CurrentActiveTime]" Name="currentTime" />
       <Variable x:TypeArguments="x:Boolean" Default="[Convert.ToBoolean(in_TrackedAppRow(&quot;Notification&quot;))]" Name="notification" />
       <Variable x:TypeArguments="x:String" Name="selector" />
       <Variable x:TypeArguments="x:String" Default="[in_TrackedAppRow(&quot;Name&quot;).ToString]" Name="app" />
