@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="438,1888" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="395.2,1537.6" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="24">
       <x:String>System.Activities</x:String>
@@ -50,31 +50,22 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="End Sequence" sap:VirtualizedContainerService.HintSize="418,1828" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="End Sequence" sap:VirtualizedContainerService.HintSize="375.2,1477.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="currentDT" />
       <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="previousDT" />
-      <Variable x:TypeArguments="ui:GenericValue" Name="currentRow" />
-      <Variable x:TypeArguments="ui:GenericValue" Name="duration" />
-      <Variable x:TypeArguments="x:String" Name="name" />
-      <Variable x:TypeArguments="x:String" Name="dateString" />
-      <Variable x:TypeArguments="x:String" Name="timespanString" />
-      <Variable x:TypeArguments="x:TimeSpan" Name="currentTimespan" />
       <Variable x:TypeArguments="ui:GenericValue" Name="previousDateString" />
       <Variable x:TypeArguments="x:String" Name="previousName" />
       <Variable x:TypeArguments="ui:GenericValue" Name="previousDuration" />
       <Variable x:TypeArguments="x:String" Name="previousTimespanString" />
       <Variable x:TypeArguments="x:TimeSpan" Name="previousTimespan" />
-      <Variable x:TypeArguments="s:DateTime" Name="currentDate" />
       <Variable x:TypeArguments="s:DateTime" Name="previousDate" />
       <Variable x:TypeArguments="sd:DataTable" Name="calculationDT" />
       <Variable x:TypeArguments="x:String" Name="reportPath" />
-      <Variable x:TypeArguments="x:String" Name="currentDatePath" />
       <Variable x:TypeArguments="x:String" Name="subtractedTimespanString" />
       <Variable x:TypeArguments="x:TimeSpan" Name="subtractedTimespan" />
       <Variable x:TypeArguments="x:Int32" Name="subtractedSeconds" />
       <Variable x:TypeArguments="x:Double" Name="percentDifference" />
-      <Variable x:TypeArguments="x:String" Name="timeString" />
       <Variable x:TypeArguments="x:String" Name="percentDirection" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -82,20 +73,27 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="376,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Retrieving both data sets...&quot;]" />
-    <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="Read pre-existing tracking records for comparison.&#xA;" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="376,108" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="FinalSeq.xlsx">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,52.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Retrieving both data sets...&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="Read pre-existing tracking records for comparison.&#xA;" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="333.6,112.8" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="FinalSeq.xlsx">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="375.2,152.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelReadRange AddHeaders="True" DataTable="[previousDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="Sheet1">
+            <ui:ExcelReadRange AddHeaders="True" DataTable="[previousDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="333.6,60" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="Sheet1">
               <ui:ExcelReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
@@ -113,19 +111,19 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ExcelApplicationScope>
-    <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="Read current datatable/Excel to compare against previous records.&#xA;" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="376,123" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="CurrentSeq.xlsx">
+    <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="Read current datatable/Excel to compare against previous records.&#xA;" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="333.6,128.8" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="CurrentSeq.xlsx">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="375.2,152.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelReadRange AddHeaders="True" DataTable="[currentDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="Sheet1">
+            <ui:ExcelReadRange AddHeaders="True" DataTable="[currentDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="333.6,60" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="Sheet1">
               <ui:ExcelReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
@@ -143,30 +141,45 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ExcelApplicationScope>
-    <ui:BuildDataTable sap2010:Annotation.AnnotationText="This is the datatable used to generate the daily report." DataTable="[calculationDT]" DisplayName="Build Data Table to output" sap:VirtualizedContainerService.HintSize="376,93" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; type=&quot;xs:dateTime&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Name&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Difference_x0020_in_x0020_Time&quot; type=&quot;xs:duration&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Percent_x0020_Difference&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Increase_x002F_Decrease&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName /&gt;&#xA;&lt;/NewDataSet&gt;">
+    <ui:BuildDataTable sap2010:Annotation.AnnotationText="This is the datatable used to generate the daily report." DataTable="[calculationDT]" DisplayName="Build Data Table to output" sap:VirtualizedContainerService.HintSize="333.6,91.2" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; type=&quot;xs:dateTime&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Name&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Difference_x0020_in_x0020_Time&quot; type=&quot;xs:duration&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Percent_x0020_Difference&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Increase_x002F_Decrease&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName /&gt;&#xA;&lt;/NewDataSet&gt;">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:BuildDataTable>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="376,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Matching names of applications...&quot;]" />
-    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Compare all records in the current record against the ones in the previous record. If the names are the same, log into a document.&#xA;" DataTable="[currentDT]" DisplayName="For Each Row in the current tracker" sap:VirtualizedContainerService.HintSize="376,286" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,52.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Matching names of applications...&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Compare all records in the current record against the ones in the previous record. If the names are the same, log into a document.&#xA;" DataTable="[currentDT]" DisplayName="For Each Row in the current tracker" sap:VirtualizedContainerService.HintSize="333.6,160.8" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="801.6,1719.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="s:DateTime" Name="currentDate" />
+              <Variable x:TypeArguments="x:String" Name="dateString" />
+              <Variable x:TypeArguments="x:String" Name="name" />
+              <Variable x:TypeArguments="ui:GenericValue" Name="duration" />
+              <Variable x:TypeArguments="x:String" Name="timespanString" />
+              <Variable x:TypeArguments="x:TimeSpan" Name="currentTimespan" />
+            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Sequence sap2010:Annotation.AnnotationText="Imports fields from the current datatable to be used for comparison. Converts the duration timespan variable twice for both string manipulation and for difference in time calculations.  " DisplayName="Assign Variables in the current datatable" sap:VirtualizedContainerService.HintSize="842,198" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <Sequence sap2010:Annotation.AnnotationText="Imports fields from the current datatable to be used for comparison. Converts the duration timespan variable twice for both string manipulation and for difference in time calculations.  " DisplayName="Assign Variables in the current datatable" sap:VirtualizedContainerService.HintSize="760,208.8" sap2010:WorkflowViewState.IdRef="Sequence_9">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -174,7 +187,7 @@
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_25">
+              <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_25">
                 <Assign.To>
                   <OutArgument x:TypeArguments="s:DateTime">[currentDate]</OutArgument>
                 </Assign.To>
@@ -182,7 +195,7 @@
                   <InArgument x:TypeArguments="s:DateTime">[CType(row(0), Datetime)]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="Assign the date as a string" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign DisplayName="Assign the date as a string" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_1">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:String">[dateString]</OutArgument>
                 </Assign.To>
@@ -190,7 +203,7 @@
                   <InArgument x:TypeArguments="x:String">[row(0).ToString]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="Assigns just the first portion of the date variable" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_27">
+              <Assign DisplayName="Assigns just the first portion of the date variable" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_27">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:String">[dateString]</OutArgument>
                 </Assign.To>
@@ -198,7 +211,7 @@
                   <InArgument x:TypeArguments="x:String">[dateString.Substring(0, dateString.IndexOf(" "))]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="Assign the name of the application" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign DisplayName="Assign the name of the application" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_2">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:String">[name]</OutArgument>
                 </Assign.To>
@@ -206,7 +219,7 @@
                   <InArgument x:TypeArguments="x:String">[row(1).ToString]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="Assign time spent on the application" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign DisplayName="Assign time spent on the application" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_3">
                 <Assign.To>
                   <OutArgument x:TypeArguments="ui:GenericValue">[duration]</OutArgument>
                 </Assign.To>
@@ -214,7 +227,7 @@
                   <InArgument x:TypeArguments="ui:GenericValue">[row(2).ToString]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="Assign time spent on the application as a string" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+              <Assign DisplayName="Assign time spent on the application as a string" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_10">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:String">[timespanString]</OutArgument>
                 </Assign.To>
@@ -222,7 +235,7 @@
                   <InArgument x:TypeArguments="x:String">[duration.ToString]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="Assign time spent on the application as a timespan" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign DisplayName="Assign time spent on the application as a timespan" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_9">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:TimeSpan">[currentTimespan]</OutArgument>
                 </Assign.To>
@@ -231,20 +244,20 @@
                 </Assign.Value>
               </Assign>
             </Sequence>
-            <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Checks to see if the name of each tracked application in the previous datatable matches the ones currently being tracked." DataTable="[previousDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="842,1864" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+            <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Checks to see if the name of each tracked application in the previous datatable matches the ones currently being tracked." DataTable="[previousDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="760,1377.6" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="792,1685" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="710.4,1197.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence sap2010:Annotation.AnnotationText="Imports fields from the pre-existing datatable to be used for comparison. Also converts the timespan variable twice for different outputs." DisplayName="Assign variables in the previous datatable" sap:VirtualizedContainerService.HintSize="750,153" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                    <Sequence sap2010:Annotation.AnnotationText="Imports fields from the pre-existing datatable to be used for comparison. Also converts the timespan variable twice for different outputs." DisplayName="Assign variables in the previous datatable" sap:VirtualizedContainerService.HintSize="668.8,160.8" sap2010:WorkflowViewState.IdRef="Sequence_10">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -252,7 +265,7 @@
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_26">
+                      <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_26">
                         <Assign.To>
                           <OutArgument x:TypeArguments="s:DateTime">[previousDate]</OutArgument>
                         </Assign.To>
@@ -260,7 +273,7 @@
                           <InArgument x:TypeArguments="s:DateTime">[CType(row(0), Datetime)]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <Assign DisplayName="Assign the date as a string" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+                      <Assign DisplayName="Assign the date as a string" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_11">
                         <Assign.To>
                           <OutArgument x:TypeArguments="ui:GenericValue">[previousDateString]</OutArgument>
                         </Assign.To>
@@ -268,7 +281,7 @@
                           <InArgument x:TypeArguments="ui:GenericValue">[row(0).ToString]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <Assign DisplayName="Assigns just the first portion of the date variable" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+                      <Assign DisplayName="Assigns just the first portion of the date variable" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_20">
                         <Assign.To>
                           <OutArgument x:TypeArguments="ui:GenericValue">[previousDateString]</OutArgument>
                         </Assign.To>
@@ -276,7 +289,7 @@
                           <InArgument x:TypeArguments="ui:GenericValue">[previousDateString.Substring(0, previousDateString.IndexOf(" "))]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <Assign DisplayName="Assign the name of the application" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                      <Assign DisplayName="Assign the name of the application" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_12">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:String">[previousName]</OutArgument>
                         </Assign.To>
@@ -284,7 +297,7 @@
                           <InArgument x:TypeArguments="x:String">[row(1).ToString]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <Assign DisplayName="Assign time spent on the application" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+                      <Assign DisplayName="Assign time spent on the application" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_13">
                         <Assign.To>
                           <OutArgument x:TypeArguments="ui:GenericValue">[previousDuration]</OutArgument>
                         </Assign.To>
@@ -292,7 +305,7 @@
                           <InArgument x:TypeArguments="ui:GenericValue">[row(2).ToString]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <Assign DisplayName="Assign time spent on the application as a string" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_14">
+                      <Assign DisplayName="Assign time spent on the application as a string" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_14">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:String">[previousTimespanString]</OutArgument>
                         </Assign.To>
@@ -300,7 +313,7 @@
                           <InArgument x:TypeArguments="x:String">[previousDuration.ToString]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <Assign DisplayName="Assign time spent on the application as a timespan" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_15">
+                      <Assign DisplayName="Assign time spent on the application as a timespan" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_15">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:TimeSpan">[previousTimespan]</OutArgument>
                         </Assign.To>
@@ -309,18 +322,7 @@
                         </Assign.Value>
                       </Assign>
                     </Sequence>
-                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Creates the file path that will be outputted by this process" DisplayName="Invoke CreateFilePath workflow" sap:VirtualizedContainerService.HintSize="750,129" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="CreateFilePath.xaml">
-                      <ui:InvokeWorkflowFile.Arguments>
-                        <InArgument x:TypeArguments="x:String" x:Key="dateString">[dateString]</InArgument>
-                        <OutArgument x:TypeArguments="x:String" x:Key="reportPath">[reportPath]</OutArgument>
-                      </ui:InvokeWorkflowFile.Arguments>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </ui:InvokeWorkflowFile>
-                    <If Condition="[name = previousName]" DisplayName="If the application was previously recorded" sap:VirtualizedContainerService.HintSize="750,1231" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If Condition="[name = previousName]" DisplayName="If the application was previously recorded" sap:VirtualizedContainerService.HintSize="668.8,904" sap2010:WorkflowViewState.IdRef="If_1">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -328,7 +330,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <If.Then>
-                        <Sequence DisplayName="List of actions to be performed" sap:VirtualizedContainerService.HintSize="605,1083" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                        <Sequence DisplayName="List of actions to be performed" sap:VirtualizedContainerService.HintSize="524.8,754.4" sap2010:WorkflowViewState.IdRef="Sequence_17">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:Boolean" Name="withinWeek" />
                           </Sequence.Variables>
@@ -337,7 +339,7 @@
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Checks if the matched application in the overall records is within the same week as the current record. Returns true if it is and false if it is not." DisplayName="Invoke CheckWeek workflow" sap:VirtualizedContainerService.HintSize="563,144" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="CheckWeek.xaml">
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Checks if the matched application in the overall records is within the same week as the current record. Returns true if it is and false if it is not." DisplayName="Invoke CheckWeek workflow" sap:VirtualizedContainerService.HintSize="483.2,148" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="CheckWeek.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="out_withinWeek">[withinWeek]</OutArgument>
                               <InArgument x:TypeArguments="s:DateTime" x:Key="currentDate">[currentDate]</InArgument>
@@ -349,7 +351,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </ui:InvokeWorkflowFile>
-                          <If Condition="[withinWeek = True]" DisplayName="If the application has been recorded within the past week" sap:VirtualizedContainerService.HintSize="563,807" sap2010:WorkflowViewState.IdRef="If_7">
+                          <If Condition="[withinWeek = True]" DisplayName="If the application has been recorded within the past week" sap:VirtualizedContainerService.HintSize="483.2,473.6" sap2010:WorkflowViewState.IdRef="If_7">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -357,7 +359,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                             <If.Then>
-                              <Sequence sap:VirtualizedContainerService.HintSize="418,659" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                              <Sequence sap:VirtualizedContainerService.HintSize="304,324" sap2010:WorkflowViewState.IdRef="Sequence_30">
                                 <Sequence.Variables>
                                   <Variable x:TypeArguments="ui:GenericValue" Name="percentDifferenceString" />
                                 </Sequence.Variables>
@@ -366,14 +368,14 @@
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <Sequence DisplayName="Run the calculations" sap:VirtualizedContainerService.HintSize="376,405" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                <Sequence DisplayName="Run the calculations" sap:VirtualizedContainerService.HintSize="262.4,68.8" sap2010:WorkflowViewState.IdRef="Sequence_29">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Calculates difference in time spent on an app for the days within the past week." DisplayName="Invoke DailyDifferenceCalculation workflow" sap:VirtualizedContainerService.HintSize="334,129" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="DailyDifferenceCalculation.xaml">
+                                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Calculates difference in time spent on an app for the days within the past week." DisplayName="Invoke DailyDifferenceCalculation workflow" sap:VirtualizedContainerService.HintSize="333.6,132" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="DailyDifferenceCalculation.xaml">
                                     <ui:InvokeWorkflowFile.Arguments>
                                       <InArgument x:TypeArguments="x:TimeSpan" x:Key="currentTimespan">[currentTimespan]</InArgument>
                                       <InArgument x:TypeArguments="ui:GenericValue" x:Key="previousDateString">[previousDateString]</InArgument>
@@ -386,7 +388,7 @@
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
                                   </ui:InvokeWorkflowFile>
-                                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Calculates percent increase/decrease in time spent on an app for the days within the past week&#xA;" DisplayName="Invoke PercentDifferenceCalculation workflow" sap:VirtualizedContainerService.HintSize="334,144" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PercentDifferenceCalculation.xaml">
+                                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Calculates percent increase/decrease in time spent on an app for the days within the past week&#xA;" DisplayName="Invoke PercentDifferenceCalculation workflow" sap:VirtualizedContainerService.HintSize="333.6,148" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PercentDifferenceCalculation.xaml">
                                     <ui:InvokeWorkflowFile.Arguments>
                                       <InArgument x:TypeArguments="x:String" x:Key="previousTimespanString">[previousTimespanString]</InArgument>
                                       <InOutArgument x:TypeArguments="x:String" x:Key="subtractedTimespanString">[subtractedTimespanString]</InOutArgument>
@@ -402,7 +404,7 @@
                                     </sap:WorkflowViewStateService.ViewState>
                                   </ui:InvokeWorkflowFile>
                                 </Sequence>
-                                <Assign sap:VirtualizedContainerService.HintSize="376,60" sap2010:WorkflowViewState.IdRef="Assign_54">
+                                <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_54">
                                   <Assign.To>
                                     <OutArgument x:TypeArguments="ui:GenericValue">[percentDifferenceString]</OutArgument>
                                   </Assign.To>
@@ -410,7 +412,7 @@
                                     <InArgument x:TypeArguments="ui:GenericValue">[percentDifference.ToString("##.00")]</InArgument>
                                   </Assign.Value>
                                 </Assign>
-                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{previousDate, name, subtractedTimespanString, percentDifferenceString, percentDirection}]" DataTable="[calculationDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="376,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{previousDate, name, subtractedTimespanString, percentDifferenceString, percentDirection}]" DataTable="[calculationDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="262.4,22.4" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
                               </Sequence>
                             </If.Then>
                           </If>
@@ -434,23 +436,48 @@
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="376,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Creating report...&quot;]" />
-    <Sequence sap2010:Annotation.AnnotationText="Outputs analysis excel sheet with the path name being set to the current date (includes the date being compared to, name of the application, percent change and if the change is increase or decrease) and then appends the current tracked data to the overall tracking sheet.  " DisplayName="Write DataTable to new sheet" sap:VirtualizedContainerService.HintSize="376,573" sap2010:WorkflowViewState.IdRef="Sequence_22">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Creates the file path that will be outputted by this process" DisplayName="Invoke CreateFilePath workflow" sap:VirtualizedContainerService.HintSize="333.6,132" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="CreateFilePath.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="dateString">[dateString]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="reportPath">[reportPath]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Creating report...&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="Outputs analysis excel sheet with the path name being set to the current date (includes the date being compared to, name of the application, percent change and if the change is increase or decrease) and then appends the current tracked data to the overall tracking sheet.  " DisplayName="Write DataTable to new sheet" sap:VirtualizedContainerService.HintSize="333.6,240.8" sap2010:WorkflowViewState.IdRef="Sequence_22">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:WriteRange AddHeaders="True" DataTable="[calculationDT]" DisplayName="Write the datatable to the custom path" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[reportPath]" />
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Adding current tracking data to pre-existing tracking data...&quot;]" />
-      <ui:AppendRange sap2010:Annotation.AnnotationText="Add the time tracked into the overall time tracking sheet.&#xA;" DataTable="[currentDT]" DisplayName="Append Range to pre-existing log" sap:VirtualizedContainerService.HintSize="334,108" sap2010:WorkflowViewState.IdRef="AppendRange_2" SheetName="Sheet1" WorkbookPath="FinalSeq.xlsx">
+      <ui:WriteRange AddHeaders="True" DataTable="[calculationDT]" DisplayName="Write the datatable to the custom path" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[reportPath]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:WriteRange>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Adding current tracking data to pre-existing tracking data...&quot;]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
+      <ui:AppendRange sap2010:Annotation.AnnotationText="Add the time tracked into the overall time tracking sheet.&#xA;" DataTable="[currentDT]" DisplayName="Append Range to pre-existing log" sap:VirtualizedContainerService.HintSize="200,112.8" sap2010:WorkflowViewState.IdRef="AppendRange_2" SheetName="Sheet1" WorkbookPath="FinalSeq.xlsx">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
