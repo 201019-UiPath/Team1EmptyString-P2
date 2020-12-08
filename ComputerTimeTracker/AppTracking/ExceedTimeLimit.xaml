@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>754,1066.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>754,1024.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ExceedTimeLimit_FlowChart_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -56,15 +56,15 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Flowchart sap2010:Annotation.AnnotationText="Check if the User has exceeded the time limit for the specific website/application and respond accordingly based on what the User specified in the initialization prompt&#xA;IMPORTANT: Extension for specific web browser must be downloaded" DisplayName="ExceedTimeLimit_FlowChart" sap:VirtualizedContainerService.HintSize="734,966.666666666667" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart sap2010:Annotation.AnnotationText="Check if the User has exceeded the time limit for the specific website/application and respond accordingly based on what the User specified in the initialization prompt&#xA;IMPORTANT: Extension for specific web browser must be downloaded" DisplayName="ExceedTimeLimit_FlowChart" sap:VirtualizedContainerService.HintSize="734,964.666666666667" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
-      <Variable x:TypeArguments="x:String" Name="title" />
+      <Variable x:TypeArguments="x:String" Default="[Split(Split(in_Selector, &quot;title='&quot;)(1), &quot;'&quot;)(0)]" Name="title" />
       <Variable x:TypeArguments="x:TimeSpan" Default="[TimeSpan.Parse(in_TrackedAppRow(&quot;Time Limit&quot;).ToString)]" Name="timeLimit" />
       <Variable x:TypeArguments="x:TimeSpan" Default="[in_CurrentActiveTime]" Name="currentTime" />
       <Variable x:TypeArguments="x:Boolean" Default="[Convert.ToBoolean(in_TrackedAppRow(&quot;Notification&quot;))]" Name="notification" />
-      <Variable x:TypeArguments="x:String" Name="selector" />
       <Variable x:TypeArguments="x:String" Default="[in_TrackedAppRow(&quot;Name&quot;).ToString]" Name="app" />
       <Variable x:TypeArguments="x:Boolean" Name="restriction" />
     </Flowchart.Variables>
@@ -82,38 +82,37 @@
     <Flowchart.StartNode>
       <x:Reference>__ReferenceID9</x:Reference>
     </Flowchart.StartNode>
-    <FlowDecision x:Name="__ReferenceID9" sap2010:Annotation.AnnotationText="Check if the User has 5 minutes left before they reach their time limit and if they wanted an alert" Condition="[(timeLimit.TotalMinutes - currentTime.TotalMinutes).Equals(5) And notification]" DisplayName="User have 5 minutes left?" sap:VirtualizedContainerService.HintSize="138,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+    <FlowDecision x:Name="__ReferenceID9" sap2010:Annotation.AnnotationText="Check if the User has 5 minutes left before they reach their time limit and if they wanted an alert" Condition="[(timeLimit.TotalMinutes - currentTime.TotalMinutes).Equals(5) And notification]" DisplayName="User have 5 minutes left?" sap:VirtualizedContainerService.HintSize="138.666666666667,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <av:Point x:Key="ShapeLocation">380.666666666667,116.666666666667</av:Point>
-          <av:Size x:Key="ShapeSize">138,86.6666666666667</av:Size>
-          <av:PointCollection x:Key="TrueConnector">380.666666666667,160 229.333333333333,160 229.333333333333,176.666666666667</av:PointCollection>
-          <av:PointCollection x:Key="FalseConnector">518.666666666667,160 605.166666666667,160 605.166666666667,436.666666666667</av:PointCollection>
+          <av:Size x:Key="ShapeSize">138.666666666667,86.6666666666667</av:Size>
+          <av:PointCollection x:Key="TrueConnector">380.666666666667,160 229.666666666667,160 229.666666666667,176.666666666667</av:PointCollection>
+          <av:PointCollection x:Key="FalseConnector">519.333333333334,160 571.333333333333,160 571.333333333333,436.666666666667</av:PointCollection>
           <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <FlowDecision.True>
-        <FlowDecision x:Name="__ReferenceID1" Condition="[title is Nothing]" DisplayName="Application or Website?" sap:VirtualizedContainerService.HintSize="131.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+        <FlowDecision x:Name="__ReferenceID0" Condition="[in_Selector.Contains(&quot;html&quot;)]" DisplayName="Website or Application?" sap:VirtualizedContainerService.HintSize="132,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <av:Point x:Key="ShapeLocation">163.666666666667,176.666666666667</av:Point>
-              <av:Size x:Key="ShapeSize">131.333333333333,86.6666666666667</av:Size>
-              <av:PointCollection x:Key="TrueConnector">163.666666666667,220 100,220 100,281</av:PointCollection>
-              <av:PointCollection x:Key="FalseConnector">295,220 360,220 360,281</av:PointCollection>
+              <av:Size x:Key="ShapeSize">132,86.6666666666667</av:Size>
+              <av:PointCollection x:Key="FalseConnector">295.666666666667,220 380,220 380,282</av:PointCollection>
+              <av:PointCollection x:Key="TrueConnector">163.666666666667,220 100,220 100,282</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <FlowDecision.True>
             <FlowStep x:Name="__ReferenceID2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <av:Point x:Key="ShapeLocation">0,281</av:Point>
-                  <av:Size x:Key="ShapeSize">200,98</av:Size>
-                  <av:PointCollection x:Key="ConnectorLocation">100,379 100,409 535.5,409 535.5,436.666666666667</av:PointCollection>
+                  <av:Point x:Key="ShapeLocation">0,282</av:Point>
+                  <av:Size x:Key="ShapeSize">200,96</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have 5 minutes left on the App" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="200,98" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;You have 5 more minutes left on: &quot; + app]">
+              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have 5 minutes left on the website" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="200,96" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;You have 5 more minutes left on: &quot; + title]">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -121,162 +120,17 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:MessageBox>
-              <FlowStep.Next>
-                <FlowDecision x:Name="__ReferenceID0" sap2010:Annotation.AnnotationText="Check if the user has reached their time limit" Condition="[(timeLimit.TotalMinutes - currentTime.TotalMinutes) &lt;= 0]" DisplayName="User Reached Time Limit?" sap:VirtualizedContainerService.HintSize="139.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      <av:Point x:Key="ShapeLocation">500.666666666667,436.666666666667</av:Point>
-                      <av:Size x:Key="ShapeSize">139.333333333333,86.6666666666667</av:Size>
-                      <av:PointCollection x:Key="TrueConnector">500.666666666667,480 400,480</av:PointCollection>
-                      <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <FlowDecision.True>
-                    <FlowStep x:Name="__ReferenceID4">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <av:Point x:Key="ShapeLocation">200,431</av:Point>
-                          <av:Size x:Key="ShapeSize">200,98</av:Size>
-                          <av:PointCollection x:Key="ConnectorLocation">300,529 300,559 565.666666666667,559 565.666666666667,576.666666666667</av:PointCollection>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have reached their time limit" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="200,98" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;You Have reached your time limit on: &quot; +  app + &quot; &quot; + title]">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                      </ui:MessageBox>
-                      <FlowStep.Next>
-                        <FlowDecision x:Name="__ReferenceID5" sap2010:Annotation.AnnotationText="Check if the User wanted to be forced out of the application once they reach their time limit" Condition="[(timeLimit.TotalMinutes - currentTime.TotalMinutes) &lt;= 0 And restriction]" DisplayName="Force Close?" sap:VirtualizedContainerService.HintSize="72,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              <av:Point x:Key="ShapeLocation">530.666666666667,576.666666666667</av:Point>
-                              <av:Size x:Key="ShapeSize">72,86.6666666666667</av:Size>
-                              <av:PointCollection x:Key="TrueConnector">530.666666666667,620 260,620 260,636.666666666667</av:PointCollection>
-                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <FlowDecision.True>
-                            <FlowDecision x:Name="__ReferenceID6" Condition="[title IsNot Nothing]" DisplayName="Website or Application?" sap:VirtualizedContainerService.HintSize="131.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_5">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  <av:Point x:Key="ShapeLocation">194.333333333333,636.666666666667</av:Point>
-                                  <av:Size x:Key="ShapeSize">131.333333333333,86.6666666666667</av:Size>
-                                  <av:PointCollection x:Key="TrueConnector">194.333333333333,680 130,680 130,745.333333333333</av:PointCollection>
-                                  <av:PointCollection x:Key="FalseConnector">325.666666666667,680 410,680 410,745.333333333333</av:PointCollection>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                              <FlowDecision.True>
-                                <FlowStep x:Name="__ReferenceID7">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <av:Point x:Key="ShapeLocation">30,745.333333333333</av:Point>
-                                      <av:Size x:Key="ShapeSize">200,100</av:Size>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <Sequence sap2010:Annotation.AnnotationText="Closes the Website" DisplayName="Sequence - Close Website" sap:VirtualizedContainerService.HintSize="200,100" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Attach Browser using the Selector from the TransactionItem and close the tab" BrowserType="Chrome" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="434,298" sap2010:WorkflowViewState.IdRef="BrowserScope_1" Selector="[in_Selector]">
-                                      <ui:BrowserScope.Body>
-                                        <ActivityAction x:TypeArguments="x:Object">
-                                          <ActivityAction.Argument>
-                                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                          </ActivityAction.Argument>
-                                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,144.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
-                                            <sap:WorkflowViewStateService.ViewState>
-                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                              </scg:Dictionary>
-                                            </sap:WorkflowViewStateService.ViewState>
-                                            <ui:CloseTab Browser="{x:Null}" sap2010:Annotation.AnnotationText="" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="200,52.6666666666667" sap2010:WorkflowViewState.IdRef="CloseTab_1">
-                                              <sap:WorkflowViewStateService.ViewState>
-                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                                </scg:Dictionary>
-                                              </sap:WorkflowViewStateService.ViewState>
-                                            </ui:CloseTab>
-                                          </Sequence>
-                                        </ActivityAction>
-                                      </ui:BrowserScope.Body>
-                                      <sap:WorkflowViewStateService.ViewState>
-                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                        </scg:Dictionary>
-                                      </sap:WorkflowViewStateService.ViewState>
-                                    </ui:BrowserScope>
-                                  </Sequence>
-                                </FlowStep>
-                              </FlowDecision.True>
-                              <FlowDecision.False>
-                                <FlowStep x:Name="__ReferenceID8">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <av:Point x:Key="ShapeLocation">310,745.333333333333</av:Point>
-                                      <av:Size x:Key="ShapeSize">200,69.3333333333333</av:Size>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <Sequence sap2010:Annotation.AnnotationText="Closes the Application" DisplayName="Sequence - Close Application" sap:VirtualizedContainerService.HintSize="476,436" sap2010:WorkflowViewState.IdRef="Sequence_3">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" sap2010:Annotation.AnnotationText="Attach Window using the Selector from the TransactionItem and close the window" DisplayName="Attach Window" sap:VirtualizedContainerService.HintSize="434,313.333333333333" sap2010:WorkflowViewState.IdRef="WindowScope_1" Selector="[in_Selector]">
-                                      <ui:WindowScope.Body>
-                                        <ActivityAction x:TypeArguments="x:Object">
-                                          <ActivityAction.Argument>
-                                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                          </ActivityAction.Argument>
-                                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,160" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                                            <sap:WorkflowViewStateService.ViewState>
-                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                              </scg:Dictionary>
-                                            </sap:WorkflowViewStateService.ViewState>
-                                            <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="CloseWindow_1" WaitForReady="INTERACTIVE" />
-                                          </Sequence>
-                                        </ActivityAction>
-                                      </ui:WindowScope.Body>
-                                      <sap:WorkflowViewStateService.ViewState>
-                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                        </scg:Dictionary>
-                                      </sap:WorkflowViewStateService.ViewState>
-                                    </ui:WindowScope>
-                                  </Sequence>
-                                </FlowStep>
-                              </FlowDecision.False>
-                            </FlowDecision>
-                          </FlowDecision.True>
-                        </FlowDecision>
-                      </FlowStep.Next>
-                    </FlowStep>
-                  </FlowDecision.True>
-                </FlowDecision>
-              </FlowStep.Next>
             </FlowStep>
           </FlowDecision.True>
           <FlowDecision.False>
-            <FlowStep x:Name="__ReferenceID3">
+            <FlowStep x:Name="__ReferenceID1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <av:Point x:Key="ShapeLocation">260,281</av:Point>
-                  <av:Size x:Key="ShapeSize">200,98</av:Size>
-                  <av:PointCollection x:Key="ConnectorLocation">360,379 360,409 570.333333333333,409 570.333333333333,436.666666666667</av:PointCollection>
+                  <av:Point x:Key="ShapeLocation">280,282</av:Point>
+                  <av:Size x:Key="ShapeSize">200,96</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have 5 minutes left on the website" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="200,98" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;You have 5 more minutes left on: &quot; + title]">
+              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have 5 minutes left on the App" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="200,96" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;You have 5 more minutes left on: &quot; + app]">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -284,21 +138,159 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:MessageBox>
-              <FlowStep.Next>
-                <x:Reference>__ReferenceID0</x:Reference>
-              </FlowStep.Next>
             </FlowStep>
           </FlowDecision.False>
         </FlowDecision>
       </FlowDecision.True>
       <FlowDecision.False>
-        <x:Reference>__ReferenceID0</x:Reference>
+        <FlowDecision x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Check if the user has reached their time limit" Condition="[(timeLimit.TotalMinutes - currentTime.TotalMinutes) &lt;= 0]" DisplayName="User Reached Time Limit?" sap:VirtualizedContainerService.HintSize="141.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <av:Point x:Key="ShapeLocation">500.666666666667,436.666666666667</av:Point>
+              <av:Size x:Key="ShapeSize">141.333333333333,86.6666666666667</av:Size>
+              <av:PointCollection x:Key="TrueConnector">500.666666666667,480 400,480</av:PointCollection>
+              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <FlowDecision.True>
+            <FlowStep x:Name="__ReferenceID4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <av:Point x:Key="ShapeLocation">200,431</av:Point>
+                  <av:Size x:Key="ShapeSize">200,96</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">300,527 300,557 566.666666666667,557 566.666666666667,576.666666666667</av:PointCollection>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have reached their time limit" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="200,96" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;You Have reached your time limit on: &quot; +  app + &quot; &quot; + title]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:MessageBox>
+              <FlowStep.Next>
+                <FlowDecision x:Name="__ReferenceID5" sap2010:Annotation.AnnotationText="Check if the User wanted to be forced out of the application once they reach their time limit" Condition="[restriction]" DisplayName="Force Close?" sap:VirtualizedContainerService.HintSize="72,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <av:Point x:Key="ShapeLocation">530.666666666667,576.666666666667</av:Point>
+                      <av:Size x:Key="ShapeSize">72,86.6666666666667</av:Size>
+                      <av:PointCollection x:Key="TrueConnector">530.666666666667,620 260.333333333333,620 260.333333333333,636.666666666667</av:PointCollection>
+                      <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <FlowDecision.True>
+                    <FlowDecision x:Name="__ReferenceID6" Condition="[in_Selector.Contains(&quot;html&quot;)]" DisplayName="Website or Application?" sap:VirtualizedContainerService.HintSize="132,86.6666666666667" sap2010:WorkflowViewState.IdRef="FlowDecision_5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <av:Point x:Key="ShapeLocation">194.333333333333,636.666666666667</av:Point>
+                          <av:Size x:Key="ShapeSize">132,86.6666666666667</av:Size>
+                          <av:PointCollection x:Key="FalseConnector">326.333333333333,680 450,680 450,740.666666666667</av:PointCollection>
+                          <av:PointCollection x:Key="TrueConnector">194.333333333333,680 100,680 100,740.666666666667</av:PointCollection>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <FlowDecision.True>
+                        <FlowStep x:Name="__ReferenceID7">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <av:Point x:Key="ShapeLocation">0,740.666666666667</av:Point>
+                              <av:Size x:Key="ShapeSize">200,98.6666666666667</av:Size>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence sap2010:Annotation.AnnotationText="Closes the Website" DisplayName="Sequence - Close Website" sap:VirtualizedContainerService.HintSize="200,98.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Attach Browser using the Selector from the TransactionItem and close the tab" BrowserType="Chrome" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="434,298" sap2010:WorkflowViewState.IdRef="BrowserScope_1" Selector="[in_Selector]">
+                              <ui:BrowserScope.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,144.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:CloseTab Browser="{x:Null}" sap2010:Annotation.AnnotationText="" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="200,52.6666666666667" sap2010:WorkflowViewState.IdRef="CloseTab_1">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:CloseTab>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:BrowserScope.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:BrowserScope>
+                          </Sequence>
+                        </FlowStep>
+                      </FlowDecision.True>
+                      <FlowDecision.False>
+                        <FlowStep x:Name="__ReferenceID8">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <av:Point x:Key="ShapeLocation">350,740.666666666667</av:Point>
+                              <av:Size x:Key="ShapeSize">200,98.6666666666667</av:Size>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence sap2010:Annotation.AnnotationText="Closes the Application" DisplayName="Sequence - Close Application" sap:VirtualizedContainerService.HintSize="200,98.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" sap2010:Annotation.AnnotationText="Attach Window using the Selector from the TransactionItem and close the window" DisplayName="Attach Window" sap:VirtualizedContainerService.HintSize="434,313.333333333333" sap2010:WorkflowViewState.IdRef="WindowScope_2" Selector="[in_Selector]">
+                              <ui:WindowScope.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,160" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="CloseWindow_2" WaitForReady="INTERACTIVE" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:WindowScope.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:WindowScope>
+                          </Sequence>
+                        </FlowStep>
+                      </FlowDecision.False>
+                    </FlowDecision>
+                  </FlowDecision.True>
+                </FlowDecision>
+              </FlowStep.Next>
+            </FlowStep>
+          </FlowDecision.True>
+        </FlowDecision>
       </FlowDecision.False>
     </FlowDecision>
+    <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
-    <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID4</x:Reference>
     <x:Reference>__ReferenceID5</x:Reference>
     <x:Reference>__ReferenceID6</x:Reference>
