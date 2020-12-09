@@ -102,11 +102,11 @@
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">20,405.6</av:Point>
-                  <av:Size x:Key="ShapeSize">200,160.8</av:Size>
-                  <av:PointCollection x:Key="ConnectorLocation">120,566.4 120,637.6</av:PointCollection>
+                  <av:Size x:Key="ShapeSize">200,176.8</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">120,582.4 120,637.6</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap2010:Annotation.AnnotationText="Wait until user input occurs, then set targetWindow based on input. This will result in a transition to the Process Transaction state in Main." DisplayName="Wait for user input" sap:VirtualizedContainerService.HintSize="496.8,866.4" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <Sequence sap2010:Annotation.AnnotationText="Wait until user input occurs, then set TransactionItem based on input event info. This will result in a transition to the Process Transaction state in Main." DisplayName="Wait for user input" sap:VirtualizedContainerService.HintSize="200,176.8" sap2010:WorkflowViewState.IdRef="Sequence_8">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="ui:EventInfo" Name="eventInfo" />
                 </Sequence.Variables>
@@ -116,68 +116,100 @@
                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MonitorEvents ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Waits until user input is detected and retrieves the window that input was sent to. Continues to the next activity after detecting a single input." DisplayName="Monitor for User Input Events" sap:VirtualizedContainerService.HintSize="455.2,729.6" sap2010:WorkflowViewState.IdRef="MonitorEvents_2">
-                  <ui:MonitorEvents.Handler>
-                    <ActivityAction x:TypeArguments="x:Object">
-                      <ActivityAction.Argument>
-                        <DelegateInArgument x:TypeArguments="x:Object" Name="args" />
-                      </ActivityAction.Argument>
-                      <Sequence DisplayName="Event Handler" sap:VirtualizedContainerService.HintSize="304,515.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="538.4,1231.2" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="100" RetryInterval="00:00:00">
+                  <ui:RetryScope.ActivityBody>
+                    <ActivityAction>
+                      <Sequence DisplayName="Wait for user input" sap:VirtualizedContainerService.HintSize="496.8,1055.2" sap2010:WorkflowViewState.IdRef="Sequence_15">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:GetEventInfo x:TypeArguments="ui:EventInfo" DisplayName="Get Event Info" sap:VirtualizedContainerService.HintSize="262.4,22.4" sap2010:WorkflowViewState.IdRef="GetEventInfo`1_2" InterceptedEvent="[args]" Result="[eventInfo]" />
-                        <Assign DisplayName="Assign previous event &quot;app&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_21">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:Object">[io_PreviousTransactionItem("app")]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:Object">[io_TransactionItem("app")]</InArgument>
-                          </Assign.Value>
-                        </Assign>
-                        <Assign DisplayName="Assign previous event &quot;time&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_22">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:Object">[io_PreviousTransactionItem("time")]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:Object">[io_TransactionItem("time")]</InArgument>
-                          </Assign.Value>
-                        </Assign>
-                        <Assign DisplayName="Assign event &quot;app&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_19">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("app")]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:Object">[CType(eventInfo.TargetWindow, UiElement).Get("app").ToString.Substring(0, (CType(eventInfo.TargetWindow, UiElement).Get("app").ToString.Length-4) )]</InArgument>
-                          </Assign.Value>
-                        </Assign>
-                        <Assign DisplayName="Assign event &quot;time&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_20">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("time")]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:Object">[Now]</InArgument>
-                          </Assign.Value>
-                        </Assign>
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="455.2,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Monitoring for user input...&quot;]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:LogMessage>
+                        <ui:MonitorEvents ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Waits until user input is detected and retrieves the window that input was sent to. Continues to the next activity after detecting a single input." DisplayName="Monitor for User Input Events" sap:VirtualizedContainerService.HintSize="455.2,829.6" sap2010:WorkflowViewState.IdRef="MonitorEvents_2">
+                          <ui:MonitorEvents.Handler>
+                            <ActivityAction x:TypeArguments="x:Object">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="x:Object" Name="args" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Set PreviousTransactionItem and TransactionItem" sap:VirtualizedContainerService.HintSize="304,615.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:GetEventInfo x:TypeArguments="ui:EventInfo" DisplayName="Get Event Info" sap:VirtualizedContainerService.HintSize="262.4,22.4" sap2010:WorkflowViewState.IdRef="GetEventInfo`1_2" InterceptedEvent="[args]" Result="[eventInfo]" />
+                                <Assign DisplayName="Assign event &quot;selector&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_23">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("selector")]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[CType(eventInfo.TargetWindow, UiElement).Selector.ToString]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign DisplayName="Assign previous event &quot;app&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_21">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Object">[io_PreviousTransactionItem("app")]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Object">[io_TransactionItem("app")]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign DisplayName="Assign previous event &quot;time&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_22">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Object">[io_PreviousTransactionItem("time")]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Object">[io_TransactionItem("time")]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign DisplayName="Assign event &quot;app&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("app")]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Object">[CType(eventInfo.TargetWindow, UiElement).Get("app").ToString.Substring(0, (CType(eventInfo.TargetWindow, UiElement).Get("app").ToString.Length-4) )]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign DisplayName="Assign event &quot;time&quot;" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Object">[io_TransactionItem("time")]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Object">[Now]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:MonitorEvents.Handler>
+                          <ui:MonitorEvents.RepeatForever>
+                            <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_1" />
+                          </ui:MonitorEvents.RepeatForever>
+                          <ui:MonitorEvents.Triggers>
+                            <ui:MouseTrigger DisplayName="Mouse Trigger" EventMode="EVENT_FORWARD" sap:VirtualizedContainerService.HintSize="333.6,85.6" sap2010:WorkflowViewState.IdRef="MouseTrigger_2" KeyModifiers="None" MouseButton="BTN_LEFT" />
+                          </ui:MonitorEvents.Triggers>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:MonitorEvents>
                       </Sequence>
                     </ActivityAction>
-                  </ui:MonitorEvents.Handler>
-                  <ui:MonitorEvents.RepeatForever>
-                    <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_1" />
-                  </ui:MonitorEvents.RepeatForever>
-                  <ui:MonitorEvents.Triggers>
-                    <ui:MouseTrigger DisplayName="Mouse Trigger" EventMode="EVENT_FORWARD" sap:VirtualizedContainerService.HintSize="333.6,85.6" sap2010:WorkflowViewState.IdRef="MouseTrigger_2" KeyModifiers="None" MouseButton="BTN_LEFT" />
-                  </ui:MonitorEvents.Triggers>
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                </ui:MonitorEvents>
+                  </ui:RetryScope.ActivityBody>
+                  <ui:RetryScope.Condition>
+                    <ActivityFunc x:TypeArguments="x:Boolean" />
+                  </ui:RetryScope.Condition>
+                </ui:RetryScope>
               </Sequence>
               <FlowStep.Next>
                 <FlowStep x:Name="__ReferenceID7">
