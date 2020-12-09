@@ -127,7 +127,7 @@
                       <av:PointCollection x:Key="ConnectorLocation">300,724.4 300,850 343.2,850</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="375.2,180.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="200,68.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -145,10 +145,10 @@
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <av:Point x:Key="ShapeLocation">343.2,802.4</av:Point>
-                          <av:Size x:Key="ShapeSize">333.6,95.2</av:Size>
+                          <av:Size x:Key="ShapeSize">333.6,94.4</av:Size>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:Comment DisplayName="End Process" sap:VirtualizedContainerService.HintSize="333.6,95.2" sap2010:WorkflowViewState.IdRef="Comment_1" Text="The Process workflow ends without exception. This will result in a transition back to the Get Transaction Data state.">
+                      <ui:Comment DisplayName="End Process" sap:VirtualizedContainerService.HintSize="333.6,94.4" sap2010:WorkflowViewState.IdRef="Comment_1" Text="The Process workflow ends without exception. This will result in a transition back to the Get Transaction Data state.">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
