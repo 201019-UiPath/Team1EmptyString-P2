@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="624.666666666667,1202" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="402.666666666667,852" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="44">
+    <scg:List x:TypeArguments="x:String" Capacity="23">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -48,86 +48,72 @@
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="604.666666666667,1102" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Download file(s) from Storage Bucket in order to generate weekly Reports" sap:VirtualizedContainerService.HintSize="382.666666666667,868" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="DailyTrackedTimes" Name="storageBucketName" />
-      <Variable x:TypeArguments="scg:IEnumerable(x:String)" Default="[new List(Of String)]" Name="lastWeekReports" />
       <Variable x:TypeArguments="scg:IEnumerable(ucas:StorageFileInfo)" Name="storageBucketFiles" />
-      <Variable x:TypeArguments="s:DateTime" Name="fileDate" />
       <Variable x:TypeArguments="s:IFormatProvider" Default="[New DateTimeFormatProvider]" Name="provider" />
+      <Variable x:TypeArguments="x:String" Name="filePath" />
+      <Variable x:TypeArguments="scg:IEnumerable(ucas:StorageFileInfo)" Default="[new List(Of StorageFileInfo)]" Name="lastWeekReports" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ucas:ListStorageFiles Filter="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Grab all Daily Reports from Storage Bucket" Directory="\" DisplayName="List Storage Files" sap:VirtualizedContainerService.HintSize="562.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="ListStorageFiles_1" Recursive="True" Result="[storageBucketFiles]" StorageBucketName="[storageBucketName]">
+    <ucas:ListStorageFiles Filter="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Grab all Daily Reports from Storage Bucket" Directory="\" DisplayName="List Storage Files" sap:VirtualizedContainerService.HintSize="340.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="ListStorageFiles_1" Recursive="True" Result="[storageBucketFiles]" StorageBucketName="[storageBucketName]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ucas:ListStorageFiles>
-    <ui:ForEach x:TypeArguments="ucas:StorageFileInfo" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Check Which Reports are from the last week and the filename to a list" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="562.666666666667,477.333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[storageBucketFiles]">
-      <ui:ForEach.Body>
-        <ActivityAction x:TypeArguments="ucas:StorageFileInfo">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="ucas:StorageFileInfo" Name="item" />
-          </ActivityAction.Argument>
-          <Sequence sap:VirtualizedContainerService.HintSize="526,308" sap2010:WorkflowViewState.IdRef="Sequence_7">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="x:Int64" Name="diffDays" />
-            </Sequence.Variables>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[DateDiff(DateInterval.DayOfYear,DateTime.ParseExact(Split(item.FileFullPath,&quot;.&quot;)(0), &quot;MM_dd_yyyy&quot;, provider), DateTime.Now ) &lt; 7]" sap:VirtualizedContainerService.HintSize="484,216" sap2010:WorkflowViewState.IdRef="If_3">
-              <If.Then>
-                <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_5">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="scg:IEnumerable(x:String)">[lastWeekReports]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="scg:IEnumerable(x:String)">[lastWeekReports.Append(item.FileFullPath)]</InArgument>
-                  </Assign.Value>
-                </Assign>
-              </If.Then>
-            </If>
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEach.Body>
+    <Assign sap2010:Annotation.AnnotationText="Filter through files to grab reports from the past 7 days" sap:VirtualizedContainerService.HintSize="340.666666666667,107.333333333333" sap2010:WorkflowViewState.IdRef="Assign_14">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:IEnumerable(ucas:StorageFileInfo)">[lastWeekReports]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(ucas:StorageFileInfo)">[(From file in storageBucketFiles Where DateDiff(DateInterval.DayOfYear,DateTime.ParseExact(Split(file.FileFullPath,".")(0), "MM_dd_yyyy", provider), DateTime.Now ) &lt; 7).ToList]</InArgument>
+      </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ui:ForEach>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Download each Report from the last week" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="562.666666666667,385.333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[lastWeekReports]">
+    </Assign>
+    <ui:ForEach x:TypeArguments="ucas:StorageFileInfo" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="For Each report in the past week, download the excel file from the storage bucket" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="340.666666666667,476" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[lastWeekReports]">
       <ui:ForEach.Body>
-        <ActivityAction x:TypeArguments="x:String">
+        <ActivityAction x:TypeArguments="ucas:StorageFileInfo">
           <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+            <DelegateInArgument x:TypeArguments="ucas:StorageFileInfo" Name="item" />
           </ActivityAction.Argument>
-          <Sequence sap:VirtualizedContainerService.HintSize="304,216" sap2010:WorkflowViewState.IdRef="Sequence_8">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="x:String" Name="filePath" />
-            </Sequence.Variables>
+          <Sequence sap:VirtualizedContainerService.HintSize="304,292" sap2010:WorkflowViewState.IdRef="Sequence_8">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_7">
+            <Assign sap2010:Annotation.AnnotationText="Generate a filepath in order to save the daily report on the local computer" sap:VirtualizedContainerService.HintSize="262,107.333333333333" sap2010:WorkflowViewState.IdRef="Assign_7">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[filePath]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:String">["test\"+item]</InArgument>
+                <InArgument x:TypeArguments="x:String">["test\"+item.FileFullPath]</InArgument>
               </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </Assign>
-            <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[filePath]" DisplayName="Download Storage File" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_4" Path="[item]" StorageBucketName="[storageBucketName]" />
+            <ucas:DownloadStorageFile TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Download the daily report" Destination="[filePath]" DisplayName="Download Storage File" sap:VirtualizedContainerService.HintSize="262,52.6666666666667" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_4" Path="[item.FileFullPath]" StorageBucketName="[storageBucketName]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ucas:DownloadStorageFile>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
