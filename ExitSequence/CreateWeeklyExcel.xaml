@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1029,3048</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1028.66666666667,3090.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>CreateWeeklyExcel_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="24">
@@ -60,7 +60,7 @@
       <AssemblyReference>Google.Apis.Drive.v3</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CreateWeeklyExcel" sap:VirtualizedContainerService.HintSize="1009,2988" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CreateWeeklyExcel" sap:VirtualizedContainerService.HintSize="1008.66666666667,2990.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="filePath" />
       <Variable x:TypeArguments="ui:GenericValue" Name="weeklyPath" />
@@ -73,15 +73,15 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Get all downloaded files from directory" sap:VirtualizedContainerService.HintSize="967,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="Get all downloaded files from directory" sap:VirtualizedContainerService.HintSize="966.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[filePath]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("C:\Users\Ckat\Documents\UiPath\P2Main\Team1EmptyString-P2\GrabFilesFromStorageBucket\test")]</InArgument>
+        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("LastWeekReports")]</InArgument>
       </Assign.Value>
     </Assign>
-    <Sequence DisplayName="CreateWeeklyExcelPath" sap:VirtualizedContainerService.HintSize="967,251" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="CreateWeeklyExcelPath" sap:VirtualizedContainerService.HintSize="966.666666666667,252.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="currentDatePath" />
       </Sequence.Variables>
@@ -91,8 +91,8 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:Replace BuilderPattern="(?:/)+" DisplayName="Replace &quot;/&quot; with &quot;_&quot; in the path" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="Replace_1" Input="[dateString]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;LIT&quot;,&quot;OperationName&quot;:&quot;Literal&quot;,&quot;OperationValue&quot;:&quot;\/&quot;,&quot;QuantifierFirstValue&quot;:&quot;+&quot;,&quot;QuantifierID&quot;:&quot;OOM&quot;,&quot;QuantifierName&quot;:&quot;At least one (1 or more)&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="(?:/)+" RegexOption="IgnoreCase" Replacement="_" Result="[currentDatePath]" />
-      <Assign DisplayName="Create the file path" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <ui:Replace BuilderPattern="(?:/)+" DisplayName="Replace &quot;/&quot; with &quot;_&quot; in the path" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="Replace_1" Input="[dateString]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;LIT&quot;,&quot;OperationName&quot;:&quot;Literal&quot;,&quot;OperationValue&quot;:&quot;\/&quot;,&quot;QuantifierFirstValue&quot;:&quot;+&quot;,&quot;QuantifierID&quot;:&quot;OOM&quot;,&quot;QuantifierName&quot;:&quot;At least one (1 or more)&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="(?:/)+" RegexOption="IgnoreCase" Replacement="_" Result="[currentDatePath]" />
+      <Assign DisplayName="Create the file path" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_2">
         <Assign.To>
           <OutArgument x:TypeArguments="ui:GenericValue">[weeklyPath]</OutArgument>
         </Assign.To>
