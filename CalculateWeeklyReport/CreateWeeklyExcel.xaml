@@ -209,7 +209,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:RemoveDataRow Row="{x:Null}" DataTable="[processDT]" DisplayName="Remove Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="RemoveDataRow_2" RowIndex="0" />
-                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;Date&quot;), row(&quot;Time Spent&quot;)}]" DataTable="[processDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;Date&quot;), row(&quot;Time Spent&quot;).ToString.Replace(&quot;'&quot;, &quot;&quot;)}]" DataTable="[processDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
                           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,52.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Adding current tracking data to pre-existing tracking data...&quot;]">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -246,7 +246,7 @@
                             </sap:WorkflowViewStateService.ViewState>
                           </ui:LogMessage>
                           <ui:RemoveDataRow Row="{x:Null}" DataTable="[processDT]" DisplayName="Remove Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="RemoveDataRow_3" RowIndex="0" />
-                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;Date&quot;), row(&quot;Time Spent&quot;)}]" DataTable="[processDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;Date&quot;), row(&quot;Time Spent&quot;).ToString.Replace(&quot;'&quot;, &quot;&quot;)}]" DataTable="[processDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
                           <ui:WriteRange AddHeaders="True" DataTable="[processDT]" DisplayName="Create a new sheet and add the tracked activity" sap:VirtualizedContainerService.HintSize="334,114.666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[row(&quot;Name&quot;).ToString]" StartingCell="A1" WorkbookPath="[weeklyPath]">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
