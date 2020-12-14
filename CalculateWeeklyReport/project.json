@@ -1,6 +1,6 @@
 {
-  "name": "P2Final",
-  "description": "Blank Process",
+  "name": "CalculateWeekReport",
+  "description": "Calculates Weekly Report by grabbing files from the Storage Bucket",
   "main": "Main.xaml",
   "dependencies": {
     "System.Text.RegularExpressions": "[4.3.1]",
