@@ -3,11 +3,12 @@
     <x:Property Name="in_TrackedAppRow" Type="InArgument(sd:DataRow)" />
     <x:Property Name="in_CurrentActiveTime" Type="InArgument(x:TimeSpan)" />
     <x:Property Name="in_Selector" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>753.6,1025.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>753.6,1065.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ExceedTimeLimit_FlowChart_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -60,7 +61,6 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap2010:Annotation.AnnotationText="Check if the User has exceeded the time limit for the specific website/application and respond accordingly based on what the User specified in the initialization prompt&#xA;IMPORTANT: Extension for specific web browser must be downloaded" DisplayName="ExceedTimeLimit_FlowChart" sap:VirtualizedContainerService.HintSize="733.6,965.6" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -121,29 +121,38 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <av:Point x:Key="ShapeLocation">488.8,276.4</av:Point>
               <av:Size x:Key="ShapeSize">142.4,87.2</av:Size>
-              <av:PointCollection x:Key="TrueConnector">488.8,320 390,320</av:PointCollection>
+              <av:PointCollection x:Key="TrueConnector">488.8,320 458.8,320 458.8,330 390,330</av:PointCollection>
               <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <FlowDecision.True>
-            <FlowStep x:Name="__ReferenceID2">
+            <FlowStep x:Name="__ReferenceID6">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <av:Point x:Key="ShapeLocation">190,271.6</av:Point>
-                  <av:Size x:Key="ShapeSize">200,96.8</av:Size>
-                  <av:PointCollection x:Key="ConnectorLocation">290,368.4 290,398.4 430,398.4 430,426.4</av:PointCollection>
+                  <av:Point x:Key="ShapeLocation">190,303.6</av:Point>
+                  <av:Size x:Key="ShapeSize">200,52.8</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">290,356.4 290,386.4 430,386.4 430,426.4</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have reached their time limit" DisplayName="Notify user of exeed time limit" sap:VirtualizedContainerService.HintSize="200,96.8" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;You Have reached your time limit on: &quot; +  app]">
+              <If Condition="[notification]" DisplayName="Notify user if necessary" sap:VirtualizedContainerService.HintSize="483.2,240.8" sap2010:WorkflowViewState.IdRef="If_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-              </ui:MessageBox>
+                <If.Then>
+                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Alert User they have reached their time limit" DisplayName="Notify user of exeed time limit" sap:VirtualizedContainerService.HintSize="333.6,91.2" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;You Have reached your time limit on: &quot; +  app]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:MessageBox>
+                </If.Then>
+              </If>
               <FlowStep.Next>
-                <FlowDecision x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Check if the User wanted to be forced out of the application once they reach their time limit" Condition="[restriction]" DisplayName="Force Close?" sap:VirtualizedContainerService.HintSize="72,87.2" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
+                <FlowDecision x:Name="__ReferenceID2" sap2010:Annotation.AnnotationText="Check if the User wanted to be forced out of the application once they reach their time limit" Condition="[restriction]" DisplayName="Force Close?" sap:VirtualizedContainerService.HintSize="72,87.2" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -154,7 +163,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <FlowDecision.True>
-                    <FlowDecision x:Name="__ReferenceID4" Condition="[in_Selector.Contains(&quot;html&quot;)]" DisplayName="Website or Application?" sap:VirtualizedContainerService.HintSize="132.8,87.2" sap2010:WorkflowViewState.IdRef="FlowDecision_5">
+                    <FlowDecision x:Name="__ReferenceID3" Condition="[in_Selector.Contains(&quot;html&quot;)]" DisplayName="Website or Application?" sap:VirtualizedContainerService.HintSize="132.8,87.2" sap2010:WorkflowViewState.IdRef="FlowDecision_5">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -165,21 +174,21 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <FlowDecision.True>
-                        <FlowStep x:Name="__ReferenceID5">
+                        <FlowStep x:Name="__ReferenceID4">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <av:Point x:Key="ShapeLocation">50,670</av:Point>
                               <av:Size x:Key="ShapeSize">200,100</av:Size>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Sequence sap2010:Annotation.AnnotationText="Closes the Website" DisplayName="Close Website" sap:VirtualizedContainerService.HintSize="475.2,330.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                          <Sequence sap2010:Annotation.AnnotationText="Closes the Website" DisplayName="Close Website" sap:VirtualizedContainerService.HintSize="200,100" sap2010:WorkflowViewState.IdRef="Sequence_2">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Attach Browser using the Selector from the TransactionItem and close the tab" BrowserType="Chrome" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="BrowserScope_1" Selector="[in_Selector]">
+                            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Attach Browser using the Selector from the TransactionItem and close the tab" BrowserType="Firefox" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="BrowserScope_1" Selector="[in_Selector]" TimeoutMS="[Cint(in_Config(&quot;TimeoutForHTML_ElementMS&quot;))]">
                               <ui:BrowserScope.Body>
                                 <ActivityAction x:TypeArguments="x:Object">
                                   <ActivityAction.Argument>
@@ -204,7 +213,7 @@
                         </FlowStep>
                       </FlowDecision.True>
                       <FlowDecision.False>
-                        <FlowStep x:Name="__ReferenceID6">
+                        <FlowStep x:Name="__ReferenceID5">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <av:Point x:Key="ShapeLocation">400,670</av:Point>

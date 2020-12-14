@@ -52,6 +52,7 @@
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap2010:Annotation.AnnotationText="Accepts a user input event and analyzes the current time-tracking data. Checks if the user input event occured in an application that the user is tracking. If so, checks if the input event was for the same application as the previous user input event. If so, adds the time in between events to the time spent on that application. If the input event was not in a tracked application or in an application different from the previous input event, the process ends.&#xA;&#xA;If time is added to a tracked application, invokes ExceedTimeLimit workflow to check if the time on that application has exceeded the time limit set in Config. Then, the process ends.&#xA;&#xA;If any kind of exception occurs, the process ends and a new user input event should be retrieved." DisplayName="Process" sap:VirtualizedContainerService.HintSize="653.6,964" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -131,7 +132,7 @@
                       <av:Size x:Key="ShapeSize">200,68.8</av:Size>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="200,68.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="375.2,206.4" sap2010:WorkflowViewState.IdRef="Sequence_6">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -142,6 +143,7 @@
                         <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TrackedAppRow">[trackedRow]</InArgument>
                         <InArgument x:TypeArguments="x:TimeSpan" x:Key="in_CurrentActiveTime">[io_ActiveTimes(trackedRow("Name").ToString)]</InArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="in_Selector">[in_TransactionItem("selector").ToString]</InArgument>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                     </ui:InvokeWorkflowFile>
                   </Sequence>
@@ -157,7 +159,7 @@
                   <av:Size x:Key="ShapeSize">200,52.8</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Event was not in previous app (changed windows)&quot;]">
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Event was not in previous app (changed windows)&quot;]">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
