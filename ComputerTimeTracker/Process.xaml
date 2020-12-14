@@ -1,12 +1,12 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ProcessFlow" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property sap2010:Annotation.AnnotationText="This is the data for the user's active window captured at a certain point, stored in a Dictionary with multi-typed values. Contains multiple keys as strings.&#xA;&#xA;&quot;app&quot; (string) : the name of the app for the target window&#xA;&quot;time&quot; (DateTime) : the time at which the target window was captured&#xD;&#xA;&quot;selector&quot; (string) : the selector for the target window&#xD;&#xA;&quot;isBrowser&quot; (bool) : true if the target window is a browser&#xD;&#xA;&quot;url&quot; (string) : the URL of the target window; if isBrowser=false, value is empty string&#xD;&#xA;&quot;website&quot; (string) : the domain name of the webpage; if isBrowser=false, value is empty string" Name="in_TransactionItem" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="This is the data for the user's active window captured at a certain point, stored in a Dictionary with multi-typed values. Contains multiple keys as strings.&#xA;&#xA;&quot;app&quot; (string) : the name of the app for the target window&#xA;&quot;time&quot; (DateTime) : the time at which the target window was captured&#xA;&quot;selector&quot; (string) : the selector for the target window&#xA;&quot;isBrowser&quot; (bool) : true if the target window is a browser&#xA;&quot;url&quot; (string) : the URL of the target window; if isBrowser=false, value is empty string&#xA;&quot;website&quot; (string) : the domain name of the webpage; if isBrowser=false, value is empty string" Name="in_TransactionItem" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property sap2010:Annotation.AnnotationText="DataTable containing the apps being tracked for time spent working. Includes names and restriction settings.&#xA;&#xA;Columns:&#xA;&quot;Name&quot; : The name of the tracked app&#xA;&quot;Time Limit&quot; : The maximum amount of time the user requested on that app&#xA;&quot;Notification&quot; : True if the user wants to be notified 5 min. before exceeding their time limit&#xA;&quot;Force Close&quot; : True if the user wants to force close the app after exceeding their time limit" Name="in_TrackedApps" Type="InArgument(sd:DataTable)" />
     <x:Property Name="io_ActiveTimes" Type="InOutArgument(scg:Dictionary(x:String, x:TimeSpan))" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property sap2010:Annotation.AnnotationText="This is the data for the preceding capture of the user's active window, stored in a Dictionary with multi-typed values. Contains multiple keys as strings.&#xA;&#xA;&quot;app&quot; (string) : the name of the app for the target window&#xA;&quot;time&quot; (DateTime) : the time at which the target window was captured&#xD;&#xA;&quot;selector&quot; (string) : the selector for the target window&#xD;&#xA;&quot;isBrowser&quot; (bool) : true if the target window is a browser&#xD;&#xA;&quot;url&quot; (string) : the URL of the target window; if isBrowser=false, value is empty string&#xD;&#xA;&quot;website&quot; (string) : the domain name of the webpage; if isBrowser=false, value is empty string" Name="in_PreviousTransactionItem" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="This is the data for the preceding capture of the user's active window, stored in a Dictionary with multi-typed values. Contains multiple keys as strings.&#xA;&#xA;&quot;app&quot; (string) : the name of the app for the target window&#xA;&quot;time&quot; (DateTime) : the time at which the target window was captured&#xA;&quot;selector&quot; (string) : the selector for the target window&#xA;&quot;isBrowser&quot; (bool) : true if the target window is a browser&#xA;&quot;url&quot; (string) : the URL of the target window; if isBrowser=false, value is empty string&#xA;&quot;website&quot; (string) : the domain name of the webpage; if isBrowser=false, value is empty string" Name="in_PreviousTransactionItem" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>853.6,987.2</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>673.6,1064</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="17">
@@ -51,7 +51,6 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
@@ -132,7 +131,7 @@
                       <av:Size x:Key="ShapeSize">200,68.8</av:Size>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="375.2,206.4" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Sequence DisplayName="Invoke ExceedTimeLimit" sap:VirtualizedContainerService.HintSize="200,68.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -158,7 +157,7 @@
                   <av:Size x:Key="ShapeSize">200,52.8</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Event was not in previous app (changed windows)&quot;]">
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Event was not in previous app (changed windows)&quot;]">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -177,7 +176,7 @@
               <av:Size x:Key="ShapeSize">200,52.8</av:Size>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Event was not in tracked app&quot;]">
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Event was not in tracked app&quot;]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
