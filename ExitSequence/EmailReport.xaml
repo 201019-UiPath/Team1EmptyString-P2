@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>416.666666666667,1586.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>498.666666666667,1837.33333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>EmailReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="23">
@@ -62,7 +62,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Email the weekly tracked times Report to the User" DisplayName="EmailReport" sap:VirtualizedContainerService.HintSize="396.666666666667,1486.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Email the weekly tracked times Report to the User" DisplayName="EmailReport" sap:VirtualizedContainerService.HintSize="478.666666666667,1737.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="finalReportDT" />
       <Variable x:TypeArguments="x:String" Name="htmlText" />
@@ -73,9 +73,9 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CommentOut sap2010:Annotation.AnnotationText="" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="354.666666666667,83.3333333333333" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut sap2010:Annotation.AnnotationText="" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436.666666666667,350.666666666667" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,286.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,241.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="sd:DataTable" Name="finalReportDT" />
             <Variable x:TypeArguments="x:String" Name="htmlText" />
@@ -86,29 +86,24 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Send an attachment of the weekly times report to the User" Body="[&quot;Hello!&quot; + Environment.NewLine + &quot;Attached you will find your Weekly Time Tracking Reports.&quot;+ Environment.NewLine +&quot;Have a wonderful day!&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="334,194.666666666667" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" IsBodyHtml="False" IsDraft="False" Subject="[&quot;Your Tracking Report - &quot; + DateTime.Now.ToString(&quot;MM/dd/yyyy&quot;)]" To="[in_UserEmail]">
-            <ui:SendOutlookMail.Files>
+          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[htmlText]" DisplayName="Send SMTP Mail Message" Email="shalei.kumar@gmail.com" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,149.333333333333" sap2010:WorkflowViewState.IdRef="SendMail_2" IsBodyHtml="True" Password="bellasara" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="[&quot;Your Tracking Report - &quot; + DateTime.Now.ToString(&quot;MM/dd/yyyy&quot;)]" To="[in_UserEmail]">
+            <ui:SendMail.Files>
               <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
                 <InArgument x:TypeArguments="x:String">[in_WeeklyReport]</InArgument>
               </scg:List>
-            </ui:SendOutlookMail.Files>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </ui:SendOutlookMail>
+            </ui:SendMail.Files>
+          </ui:SendMail>
         </Sequence>
       </ui:CommentOut.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:ReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read the Daily Report as a Datatable" DataTable="[finalReportDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="354.666666666667,117.333333333333" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Sheet1" WorkbookPath="[in_FinalReportPath]">
+    <ui:ReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read the Daily Report as a Datatable" DataTable="[finalReportDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="436.666666666667,117.333333333333" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Sheet1" WorkbookPath="[in_FinalReportPath]">
       <ui:ReadRange.Range>
         <InArgument x:TypeArguments="x:String">
           <Literal x:TypeArguments="x:String" Value="" />
@@ -120,7 +115,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadRange>
-    <Assign sap2010:Annotation.AnnotationText="Initialize the beginning of html text" sap:VirtualizedContainerService.HintSize="354.666666666667,92.6666666666667" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign sap2010:Annotation.AnnotationText="Initialize the beginning of html text" sap:VirtualizedContainerService.HintSize="436.666666666667,92.6666666666667" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[htmlText]</OutArgument>
       </Assign.To>
@@ -133,7 +128,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="for each row in our datatable, add values to our html table in html text" DataTable="[finalReportDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="354.666666666667,352" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="for each row in our datatable, add values to our html table in html text" DataTable="[finalReportDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="436.666666666667,352" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
@@ -162,7 +157,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <Assign sap2010:Annotation.AnnotationText="Add ending tags to our html text" sap:VirtualizedContainerService.HintSize="354.666666666667,92.6666666666667" sap2010:WorkflowViewState.IdRef="Assign_6">
+    <Assign sap2010:Annotation.AnnotationText="Add ending tags to our html text" sap:VirtualizedContainerService.HintSize="436.666666666667,92.6666666666667" sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[htmlText]</OutArgument>
       </Assign.To>
@@ -175,7 +170,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Send an attachment of the weekly times report to the User and send the Daily Report in the body of the email" Body="[htmlText]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="354.666666666667,211.333333333333" sap2010:WorkflowViewState.IdRef="SendOutlookMail_3" IsBodyHtml="True" IsDraft="False" Subject="[&quot;Your Tracking Report - &quot; + DateTime.Now.ToString(&quot;MM/dd/yyyy&quot;)]" To="[in_UserEmail]">
+    <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Send an attachment of the weekly times report to the User" Body="[&quot;Hello!&quot; + Environment.NewLine + &quot;Attached you will find your Weekly Time Tracking Reports.&quot;+ Environment.NewLine +&quot;Have a wonderful day!&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="436.666666666667,194.666666666667" sap2010:WorkflowViewState.IdRef="SendOutlookMail_4" IsBodyHtml="False" IsDraft="False" Subject="[&quot;Your Tracking Report - &quot; + DateTime.Now.ToString(&quot;MM/dd/yyyy&quot;)]" To="[in_UserEmail]">
       <ui:SendOutlookMail.Files>
         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
           <InArgument x:TypeArguments="x:String">[in_WeeklyReport]</InArgument>
@@ -187,14 +182,14 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:SendOutlookMail>
-    <ui:Delete ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Deletes Daily Report from local computer" sap:VirtualizedContainerService.HintSize="354.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[in_FinalReportPath]">
+    <ui:Delete ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Deletes Daily Report from local computer" sap:VirtualizedContainerService.HintSize="436.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[in_FinalReportPath]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:Delete>
-    <ui:Delete ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Delete Weekly Report from local computer" sap:VirtualizedContainerService.HintSize="354.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="Delete_2" Path="[in_WeeklyReport]">
+    <ui:Delete ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Delete Weekly Report from local computer" sap:VirtualizedContainerService.HintSize="436.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="Delete_2" Path="[in_WeeklyReport]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
