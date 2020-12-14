@@ -175,7 +175,7 @@
         <OutArgument x:TypeArguments="ui:GenericValue">[userEmail]</OutArgument>
       </ui:GetRobotAsset.Value>
     </ui:GetRobotAsset>
-    <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Send an attachment of the weekly times report to the User" Body="[htmlText]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="444,194.666666666667" sap2010:WorkflowViewState.IdRef="SendOutlookMail_4" IsBodyHtml="False" IsDraft="False" Subject="[&quot;Your Tracking Report - &quot; + DateTime.Now.ToString(&quot;MM/dd/yyyy&quot;)]" To="[userEmail]">
+    <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Send an attachment of the weekly times report to the User" Body="[htmlText]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="444,194.666666666667" sap2010:WorkflowViewState.IdRef="SendOutlookMail_4" IsBodyHtml="True" IsDraft="False" Subject="[&quot;Your Tracking Report - &quot; + DateTime.Now.ToString(&quot;MM/dd/yyyy&quot;)]" To="[userEmail]">
       <ui:SendOutlookMail.Files>
         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
           <InArgument x:TypeArguments="x:String">[in_WeeklyReport]</InArgument>
