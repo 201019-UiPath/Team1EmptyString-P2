@@ -3,7 +3,6 @@
   "description": "Calculates Weekly Report by grabbing files from the Storage Bucket",
   "main": "Main.xaml",
   "dependencies": {
-    "System.Text.RegularExpressions": "[4.3.1]",
     "UiPath.Excel.Activities": "[2.7.2]",
     "UiPath.Mail.Activities": "[1.7.2]",
     "UiPath.System.Activities": "[20.10.1]",

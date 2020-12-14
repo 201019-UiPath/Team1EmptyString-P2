@@ -86,7 +86,7 @@
         <OutArgument x:TypeArguments="s:String[]">[filePath]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("LastWeekReports")]</InArgument>
+        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("LastWeekReports", "*.xlsx")]</InArgument>
       </Assign.Value>
     </Assign>
     <Sequence DisplayName="CreateWeeklyExcelPath" sap:VirtualizedContainerService.HintSize="969.333333333333,252.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
