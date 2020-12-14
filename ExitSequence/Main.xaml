@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="923.333333333333,5262.66666666667" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="923.333333333333,5338" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="24">
       <x:String>System.Activities</x:String>
@@ -53,7 +53,7 @@
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="End Sequence" sap:VirtualizedContainerService.HintSize="903.333333333333,5162.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="End Sequence" sap:VirtualizedContainerService.HintSize="903.333333333333,5238" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="currentDT" />
       <Variable x:TypeArguments="sd:DataTable" Name="previousDT" />
@@ -228,13 +228,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Compare all records in the current record against the ones in the previous record. If the names are the same, log into a document.&#xA;" DataTable="[currentDT]" DisplayName="For Each Row in the current tracker" sap:VirtualizedContainerService.HintSize="861.333333333333,2764" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Compare all records in the current record against the ones in the previous record. If the names are the same, log into a document.&#xA;" DataTable="[currentDT]" DisplayName="For Each Row in the current tracker" sap:VirtualizedContainerService.HintSize="861.333333333333,2777.33333333333" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="810.666666666667,2566" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="810.666666666667,2579.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="name" />
               <Variable x:TypeArguments="x:String" Name="duration" />
@@ -274,9 +274,9 @@
                 <InArgument x:TypeArguments="x:TimeSpan">[Timespan.Parse(duration.ToString)]</InArgument>
               </Assign.Value>
             </Assign>
-            <If Condition="[nameSheet.Contains(name)]" DisplayName="Perform calculations for apps found in the last week or adds them if new" sap:VirtualizedContainerService.HintSize="768.666666666667,2168" sap2010:WorkflowViewState.IdRef="If_3">
+            <If Condition="[nameSheet.Contains(name)]" DisplayName="Perform calculations for apps found in the last week or adds them if new" sap:VirtualizedContainerService.HintSize="768.666666666667,2181.33333333333" sap2010:WorkflowViewState.IdRef="If_3">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="480.666666666667,2014" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                <Sequence sap:VirtualizedContainerService.HintSize="480.666666666667,2027.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_38">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -312,7 +312,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:ExcelApplicationScope>
-                  <Sequence sap2010:Annotation.AnnotationText="Imports fields from the pre-existing datatable to be used for comparison. Also converts the timespan variable twice for different outputs." DisplayName="Assign variables in the previous datatable" sap:VirtualizedContainerService.HintSize="438.666666666667,1147.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                  <Sequence sap2010:Annotation.AnnotationText="Imports fields from the pre-existing datatable to be used for comparison. Also converts the timespan variable twice for different outputs." DisplayName="Assign variables in the previous datatable" sap:VirtualizedContainerService.HintSize="438.666666666667,1160.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_37">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -320,13 +320,13 @@
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Checks to see if the name of each tracked application in the previous datatable matches the ones currently being tracked." DataTable="[previousDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="396.666666666667,1010" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+                    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Checks to see if the name of each tracked application in the previous datatable matches the ones currently being tracked." DataTable="[previousDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="396.666666666667,1023.33333333333" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
                       <ui:ForEachRow.Body>
                         <ActivityAction x:TypeArguments="sd:DataRow">
                           <ActivityAction.Argument>
                             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="comparedrow" />
                           </ActivityAction.Argument>
-                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="346,812" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="346,825.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_36">
                             <Sequence.Variables>
                               <Variable x:TypeArguments="ui:GenericValue" Name="previousDateString" />
                               <Variable x:TypeArguments="ui:GenericValue" Name="previousDuration" />
@@ -339,14 +339,14 @@
                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <Sequence DisplayName="Assign Variables from previous tracking" sap:VirtualizedContainerService.HintSize="304,452" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                            <Sequence DisplayName="Assign Variables from previous tracking" sap:VirtualizedContainerService.HintSize="304,460" sap2010:WorkflowViewState.IdRef="Sequence_32">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Assign DisplayName="Assigns full previous datetime" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_33">
+                              <Assign DisplayName="Assigns full previous datetime" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_33">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="s:DateTime">[previousDate]</OutArgument>
                                 </Assign.To>
@@ -354,7 +354,7 @@
                                   <InArgument x:TypeArguments="s:DateTime">[CType(comparedrow("Date"), Datetime)]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <Assign DisplayName="Assigns just the first portion of the date variable" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_34">
+                              <Assign DisplayName="Assigns just the first portion of the date variable" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_34">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="ui:GenericValue">[previousDateString]</OutArgument>
                                 </Assign.To>
@@ -362,7 +362,7 @@
                                   <InArgument x:TypeArguments="ui:GenericValue">[previousDate.ToString.Substring(0, previousDate.ToString.IndexOf(" "))]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <Assign DisplayName="Assign time spent on the application" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_35">
+                              <Assign DisplayName="Assign time spent on the application" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_35">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="ui:GenericValue">[previousDuration]</OutArgument>
                                 </Assign.To>
@@ -370,7 +370,7 @@
                                   <InArgument x:TypeArguments="ui:GenericValue">[comparedrow("Time Spent").ToString]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <Assign DisplayName="Assign time spent on the application as a timespan" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_36">
+                              <Assign DisplayName="Assign time spent on the application as a timespan" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_36">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:TimeSpan">[previousTimespan]</OutArgument>
                                 </Assign.To>
@@ -379,7 +379,7 @@
                                 </Assign.Value>
                               </Assign>
                             </Sequence>
-                            <Sequence DisplayName="Run the calculations" sap:VirtualizedContainerService.HintSize="304,66" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                            <Sequence DisplayName="Run the calculations" sap:VirtualizedContainerService.HintSize="304,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_33">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -415,7 +415,7 @@
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:InvokeWorkflowFile>
                             </Sequence>
-                            <Assign sap:VirtualizedContainerService.HintSize="304,60" sap2010:WorkflowViewState.IdRef="Assign_37">
+                            <Assign sap:VirtualizedContainerService.HintSize="304,62" sap2010:WorkflowViewState.IdRef="Assign_37">
                               <Assign.To>
                                 <OutArgument x:TypeArguments="ui:GenericValue">[percentDifferenceString]</OutArgument>
                               </Assign.To>
@@ -436,7 +436,7 @@
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:ForEachRow>
                   </Sequence>
-                  <ui:RemoveDataRow Row="{x:Null}" DataTable="[processDT]" DisplayName="Remove Data Row" sap:VirtualizedContainerService.HintSize="438,22" sap2010:WorkflowViewState.IdRef="RemoveDataRow_2" RowIndex="0" />
+                  <ui:RemoveDataRow Row="{x:Null}" DataTable="[processDT]" DisplayName="Remove Data Row" sap:VirtualizedContainerService.HintSize="438.666666666667,22" sap2010:WorkflowViewState.IdRef="RemoveDataRow_2" RowIndex="0" />
                   <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentDate, currentTimespan.ToString}]" DataTable="[processDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="438.666666666667,22" sap2010:WorkflowViewState.IdRef="AddDataRow_7" />
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Adding current tracking data to pre-existing tracking data...&quot;]">
                     <sap:WorkflowViewStateService.ViewState>
@@ -458,14 +458,14 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence DisplayName="If application being tracked is new" sap:VirtualizedContainerService.HintSize="242,357.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                <Sequence DisplayName="If application being tracked is new" sap:VirtualizedContainerService.HintSize="242,361.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_40">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Adding a new sheet...&quot;]">
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,52.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Adding a new sheet...&quot;]">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -475,7 +475,7 @@
                   </ui:LogMessage>
                   <ui:RemoveDataRow Row="{x:Null}" DataTable="[processDT]" DisplayName="Remove Data Row" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="RemoveDataRow_3" RowIndex="0" />
                   <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentDate, currentTimespan.ToString}]" DataTable="[processDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddDataRow_8" />
-                  <ui:WriteRange AddHeaders="True" DataTable="[processDT]" DisplayName="Create a new sheet and add the tracked activity" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[name]" StartingCell="A1" WorkbookPath="FinalSeq.xlsx">
+                  <ui:WriteRange AddHeaders="True" DataTable="[processDT]" DisplayName="Create a new sheet and add the tracked activity" sap:VirtualizedContainerService.HintSize="200,52.6666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[name]" StartingCell="A1" WorkbookPath="FinalSeq.xlsx">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -522,5 +522,6 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_WeeklyReport">[weeklyPath]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
+    <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="861.333333333333,22" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[currentReportPath]" />
   </Sequence>
 </Activity>
