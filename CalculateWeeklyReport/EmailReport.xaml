@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>506,1846</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>506,1750.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>EmailReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="23">
@@ -61,7 +61,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Email the weekly tracked times Report to the User" DisplayName="EmailReport" sap:VirtualizedContainerService.HintSize="486,1746" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Email the weekly tracked time Reports to the User" DisplayName="EmailReport" sap:VirtualizedContainerService.HintSize="486,1650.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="finalReportDT" />
       <Variable x:TypeArguments="x:String" Name="htmlText" />
@@ -73,7 +73,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CommentOut sap2010:Annotation.AnnotationText="" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="444,178.666666666667" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="444,52.6666666666667" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
@@ -97,9 +97,8 @@
       </ui:CommentOut.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
@@ -120,7 +119,7 @@
         <OutArgument x:TypeArguments="x:String">[htmlText]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">["&lt;html&gt;&lt;body&gt;&lt;p&gt;Hello User! Your daily tracked times report is as follows:&lt;/p&gt;&lt;table border = 1&gt;&lt;tr&gt; &lt;th&gt;Date&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Difference in Time&lt;/th&gt;&lt;th&gt;Percent Difference&lt;/th&gt;&lt;th&gt;Increase/Decrease&lt;/th&gt;&lt;/tr&gt;"]</InArgument>
+        <InArgument x:TypeArguments="x:String">["&lt;html&gt;&lt;body&gt;&lt;link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1' crossorigin='anonymous'&gt;&lt;p&gt;Hello User! Your daily tracked times report is as follows:&lt;/p&gt;&lt;table class='table table-striped'&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope='col'&gt;Date&lt;/th&gt;&lt;th scope='col'&gt;Name&lt;/th&gt;&lt;th scope='col'&gt;Difference in Time&lt;/th&gt;&lt;th scope='col'&gt;Percent Difference&lt;/th&gt;&lt;th scope='col'&gt;Increase/Decrease&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;"]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -145,7 +144,7 @@
                 <OutArgument x:TypeArguments="x:String">[htmlText]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[htmltext + "&lt;tr&gt;&lt;td&gt;" + row("Date").ToString + "&lt;/td&gt;&lt;td&gt;" + row("Name").ToString + "&lt;/td&gt;&lt;td&gt;" + row("Difference in Time").ToString +"&lt;/td&gt;&lt;td&gt;" + row("Percent Difference").ToString +"&lt;/td&gt;&lt;td&gt;" + row("Increase/Decrease").ToString + "&lt;/td&gt;&lt;/tr&gt;"]</InArgument>
+                <InArgument x:TypeArguments="x:String">[htmltext + "&lt;tr&gt;&lt;td&gt;" + (Split(row("Date").ToString, " ")(0)) + "&lt;/td&gt;&lt;td&gt;" + row("Name").ToString + "&lt;/td&gt;&lt;td&gt;" + row("Difference in Time").ToString +"&lt;/td&gt;&lt;td&gt;" + row("Percent Difference").ToString +"&lt;/td&gt;&lt;td&gt;" + row("Increase/Decrease").ToString + "&lt;/td&gt;&lt;/tr&gt;"]</InArgument>
               </Assign.Value>
             </Assign>
           </Sequence>
@@ -162,7 +161,7 @@
         <OutArgument x:TypeArguments="x:String">[htmlText]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[htmltext + " &lt;/table&gt;&lt;p&gt;Attached you will find your weekly stats.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[htmltext + "&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;Attached you will find your weekly stats.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -170,12 +169,17 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="UserEmail" DisplayName="Get Asset" sap:VirtualizedContainerService.HintSize="444,140.666666666667" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Retrieve the User email from Assets" AssetName="UserEmail" DisplayName="Get Asset" sap:VirtualizedContainerService.HintSize="444,171.333333333333" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="ui:GenericValue">[userEmail]</OutArgument>
       </ui:GetRobotAsset.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:GetRobotAsset>
-    <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Send an attachment of the weekly times report to the User" Body="[htmlText]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="444,194.666666666667" sap2010:WorkflowViewState.IdRef="SendOutlookMail_4" IsBodyHtml="True" IsDraft="False" Subject="[&quot;Your Tracking Report - &quot; + DateTime.Now.ToString(&quot;MM/dd/yyyy&quot;)]" To="[userEmail]">
+    <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Send an attachment of the weekly times report to the User" Body="[htmlText]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="444,194.666666666667" sap2010:WorkflowViewState.IdRef="SendOutlookMail_4" IsBodyHtml="True" IsDraft="False" Subject="[&quot;Your Tracking Report - &quot; + Split(in_FinalReportPath, &quot;.&quot;)(0)]" To="[userEmail]">
       <ui:SendOutlookMail.Files>
         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
           <InArgument x:TypeArguments="x:String">[in_WeeklyReport]</InArgument>
