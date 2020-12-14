@@ -71,7 +71,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ucas:ListStorageFiles Filter="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Grab all Daily Reports from Storage Bucket" Directory="\" DisplayName="List Storage Files" sap:VirtualizedContainerService.HintSize="340.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="ListStorageFiles_1" Recursive="True" Result="[storageBucketFiles]" StorageBucketName="[storageBucketName]">
+    <ucas:ListStorageFiles Filter="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Grab the names of the Daily Reports from Storage Bucket" Directory="\" DisplayName="List Storage Files" sap:VirtualizedContainerService.HintSize="340.666666666667,67.3333333333333" sap2010:WorkflowViewState.IdRef="ListStorageFiles_1" Recursive="True" Result="[storageBucketFiles]" StorageBucketName="[storageBucketName]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -83,7 +83,7 @@
         <OutArgument x:TypeArguments="scg:IEnumerable(ucas:StorageFileInfo)">[lastWeekReports]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="scg:List(ucas:StorageFileInfo)">[(From file in storageBucketFiles Where DateDiff(DateInterval.DayOfYear,DateTime.ParseExact(Split(file.FileFullPath,".")(0), "MM_dd_yyyy", provider), DateTime.ParseExact(Split(in_CurrentReport ,".")(0), "MM_dd_yyyy", provider)) &lt; 7).ToList]</InArgument>
+        <InArgument x:TypeArguments="scg:List(ucas:StorageFileInfo)">[(From file in storageBucketFiles Where DateDiff(DateInterval.DayOfYear,DateTime.ParseExact(Split(file.FileFullPath,".")(0), "MM_dd_yyyy", provider), DateTime.ParseExact(Split(in_CurrentReport ,".")(0), "MM_dd_yyyy", provider)) &lt; 7 AND DateDiff(DateInterval.DayOfYear,DateTime.ParseExact(Split(file.FileFullPath,".")(0), "MM_dd_yyyy", provider), DateTime.ParseExact(Split(in_CurrentReport ,".")(0), "MM_dd_yyyy", provider)) &gt; 0).ToList]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">

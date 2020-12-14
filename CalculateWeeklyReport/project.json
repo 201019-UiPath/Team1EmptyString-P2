@@ -3,7 +3,6 @@
   "description": "Calculates Weekly Report by grabbing files from the Storage Bucket",
   "main": "Main.xaml",
   "dependencies": {
-    "System.Text.RegularExpressions": "[4.3.1]",
     "UiPath.Excel.Activities": "[2.7.2]",
     "UiPath.Mail.Activities": "[1.7.2]",
     "UiPath.System.Activities": "[20.10.1]",
@@ -12,7 +11,7 @@
   "webServices": [],
   "schemaVersion": "4.0",
   "studioVersion": "19.10.5.0",
-  "projectVersion": "1.0.0",
+  "projectVersion": "1.0.1",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,
@@ -32,6 +31,17 @@
       "privateWorkflows": []
     },
     "fileInfos": []
+  },
+  "arguments": {
+    "input": [
+      {
+        "name": "in_CurrentReport",
+        "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "required": false,
+        "hasDefault": false
+      }
+    ],
+    "output": []
   },
   "expressionLanguage": "VisualBasic"
 }
