@@ -70,7 +70,7 @@
       <Variable x:TypeArguments="s:DateTime" Name="currentDate" />
       <Variable x:TypeArguments="sd:DataTable" Name="processDT" />
       <Variable x:TypeArguments="ui:GenericValue" Name="weeklyPath" />
-      <Variable x:TypeArguments="x:String" Default="12_10_2020.xlsx" Name="currentReportPath" />
+      <Variable x:TypeArguments="x:String" Name="currentReportPath" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -518,7 +518,6 @@
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="861.333333333333,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="EmailReport.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_FinalReportPath">[reportPath]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_UserEmail">shaleik@bu.edu</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_WeeklyReport">[weeklyPath]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
