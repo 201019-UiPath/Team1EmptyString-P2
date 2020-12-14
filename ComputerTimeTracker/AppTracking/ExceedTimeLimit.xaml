@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ExceedTimeLimit_FlowChart" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ExceedTimeLimit_FlowChart" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_TrackedAppRow" Type="InArgument(sd:DataRow)" />
     <x:Property Name="in_CurrentActiveTime" Type="InArgument(x:TimeSpan)" />
@@ -61,6 +61,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap2010:Annotation.AnnotationText="Check if the User has exceeded the time limit for the specific website/application and respond accordingly based on what the User specified in the initialization prompt&#xA;IMPORTANT: Extension for specific web browser must be downloaded" DisplayName="ExceedTimeLimit_FlowChart" sap:VirtualizedContainerService.HintSize="733.6,965.6" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -134,7 +135,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">290,356.4 290,386.4 430,386.4 430,426.4</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <If Condition="[notification]" DisplayName="Notify user if necessary" sap:VirtualizedContainerService.HintSize="483.2,240.8" sap2010:WorkflowViewState.IdRef="If_1">
+              <If Condition="[notification]" DisplayName="Notify user if necessary" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="If_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -181,20 +182,81 @@
                               <av:Size x:Key="ShapeSize">200,100</av:Size>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Sequence sap2010:Annotation.AnnotationText="Closes the Website" DisplayName="Close Website" sap:VirtualizedContainerService.HintSize="200,100" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                          <Sequence sap2010:Annotation.AnnotationText="Closes the Website" DisplayName="Close Website" sap:VirtualizedContainerService.HintSize="575.2,848.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="ui:Selector" Default="[new Selector(in_Selector)]" Name="selector" />
+                              <Variable x:TypeArguments="ui:BrowserType" Default="[BrowserType.IE]" Name="browserType" />
+                            </Sequence.Variables>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="Attach Browser using the Selector from the TransactionItem and close the tab" BrowserType="Firefox" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="BrowserScope_1" Selector="[in_Selector]" TimeoutMS="[Cint(in_Config(&quot;TimeoutForHTML_ElementMS&quot;))]">
+                            <TryCatch DisplayName="Try Getting Browser Type" sap:VirtualizedContainerService.HintSize="533.6,522.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <TryCatch.Try>
+                                <Switch x:TypeArguments="x:String" DisplayName="Switch Browser Type" Expression="[selector.GetTag(0).GetAttribute(&quot;app&quot;).GetValue.ToString]" sap:VirtualizedContainerService.HintSize="496.8,291.2" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign x:Key="chrome.exe" DisplayName="Assign Chrome BrowserType" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="ui:BrowserType">[browserType]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="ui:BrowserType">[browserType.Chrome]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <Assign x:Key="firefox.exe" DisplayName="Assign Firefox BrowserType" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="ui:BrowserType">[browserType]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="ui:BrowserType">[BrowserType.Firefox]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <Assign x:Key="msedge.exe" DisplayName="Assign Edge BrowserType" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="ui:BrowserType">[browserType]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="ui:BrowserType">[BrowserType.Edge]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Switch>
+                              </TryCatch.Try>
+                              <TryCatch.Catches>
+                                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="500,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ActivityAction x:TypeArguments="s:Exception">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                    </ActivityAction.Argument>
+                                  </ActivityAction>
+                                </Catch>
+                              </TryCatch.Catches>
+                            </TryCatch>
+                            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" UiBrowser="{x:Null}" BrowserType="[browserType]" DisplayName="Attach Browser " sap:VirtualizedContainerService.HintSize="533.6,162.4" sap2010:WorkflowViewState.IdRef="BrowserScope_2" Selector="[in_Selector]" TimeoutMS="[CInt(in_Config(&quot;TimeoutForHTML_ElementMS&quot;))]">
                               <ui:BrowserScope.Body>
                                 <ActivityAction x:TypeArguments="x:Object">
                                   <ActivityAction.Argument>
                                     <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                                   </ActivityAction.Argument>
-                                  <ui:CloseTab Browser="{x:Null}" sap2010:Annotation.AnnotationText="" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="200,53.6" sap2010:WorkflowViewState.IdRef="CloseTab_1">
+                                  <ui:CloseTab Browser="{x:Null}" sap2010:Annotation.AnnotationText="" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="200,53.6" sap2010:WorkflowViewState.IdRef="CloseTab_2">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -203,11 +265,6 @@
                                   </ui:CloseTab>
                                 </ActivityAction>
                               </ui:BrowserScope.Body>
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
                             </ui:BrowserScope>
                           </Sequence>
                         </FlowStep>
