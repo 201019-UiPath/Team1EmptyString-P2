@@ -8,10 +8,10 @@ At the end of a tracking session, the tracking data is saved in an online databa
 This automation can be used as personal time management tool to help limit time spent on apps/websites. 
 
 #### FlowCharts
-![Computer Time Tracker](Computer Time Tracker Flow Diagram.png)
+![Computer Time Tracker](/Computer_Time_Tracker_Flow_Diagram.png)
 
 
-![Calculate Weekly Report](Calculate Weekly Report Flowchart.png)
+![Calculate Weekly Report](/Calculate_Weekly_Report_Flowchart.png)
 
 ### Technologies Used
 * UiPath Studio
