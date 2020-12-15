@@ -43,7 +43,7 @@ Right Click inside the folder you wish to save the project and click 'Git Bash H
 
 
 Run the following git commands in order to download the project onto your machine:
-* git clone 
+* git clone https://github.com/201019-UiPath/Team1EmptyString-P2.git
 
 
 Connect your machine to Orchestrator. Follow the directions in the link: 
