@@ -8,7 +8,10 @@ At the end of a tracking session, the tracking data is saved in an online databa
 This automation can be used as personal time management tool to help limit time spent on apps/websites. 
 
 #### FlowCharts
+![Process Flow Design](Computer Time Tracker Flow Diagram.png)
 
+
+![Process Flow Design](Calculate Weekly Report Flowchart.png)
 
 ### Technologies Used
 * UiPath Studio
@@ -48,16 +51,31 @@ Connect your machine to Orchestrator. Follow the directions in the link:
 
 
 Create two storage buckets with the following names: DailyTrackedTimes and TrackedAppsSettings.
-In TrackedAppsSettings upload an excel file TrackedApps.xlsx with the following Column Names: Name, Time Limit,	Notification, Force Close and Type. In the Name column specify the name of the website or the the executable file name for an app. In the Time Limit column, specify a time limit in hh:mm:ss format. For Notification and Force Close specify a boolean value. Lastly in Type, Insert 'Website' or 'App'.
+
+
+In TrackedAppsSettings upload an excel file TrackedApps.xlsx with the following Column Names: Name, Time Limit,	Notification, Force Close and Type. 
+
+
+In the Name column specify the name of the website or the the executable file name for an app. In the Time Limit column, specify a time limit in hh:mm:ss format. For Notification and Force Close specify a boolean value. Lastly in Type, Insert 'Website' or 'App'.
 
 
 Lastly, create an asset called 'UserEmail' and store an email to send the Report to. 
 
 ### Usage
-Navigate to the ComputerTimeTracker folder and click Main.xaml. This opens our automation in UiPath Studio. Here input an end time in the arguments tab in a DateTime format "yyyy-MM-ddThh:mm:ss" (including the quotes). Click Run and the ComputerTimeTracker will start tracking until the end time or if the user does not have any of the tracked apps/websites open. After our ComputerTimeTracker ends, it will push the days report in our DailyTrackedTimes storage bucket with the filename as the days date (in MM_dd_yyyy.xlsx format). 
+Navigate to the ComputerTimeTracker folder and click Main.xaml. This opens our automation in UiPath Studio. 
+
+Here input an end time in the arguments tab in a DateTime format "yyyy-MM-ddThh:mm:ss" (including the quotes). 
+
+Click Run and the ComputerTimeTracker will start tracking until the end time or if the user does not have any of the tracked apps/websites open. 
+
+After our ComputerTimeTracker ends, it will push the days report in our DailyTrackedTimes storage bucket with the filename as the days date (in MM_dd_yyyy.xlsx format). 
 
 
-Next, Navigate to CalculateWeeklyReport folder and click Main.xaml. Input the name of a report in our storage bucket to base the weekly report on (in the MM_dd_yyyy.xlsx format). Click run and you should receive a report on your weekly comparisons and your top three most used apps. 
+Next, Navigate to CalculateWeeklyReport folder and click Main.xaml. 
+
+Input the name of a report in our storage bucket to base the weekly report on (in the MM_dd_yyyy.xlsx format). 
+
+Click run and you should receive a report on your weekly comparisons and your top three most used apps. 
 
 
 ### Contributors
